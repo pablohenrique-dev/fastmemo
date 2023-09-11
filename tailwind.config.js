@@ -2,7 +2,17 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        fadeRight: {
+          "0%": { transform: "translateX(-20px)", opacity: 0 },
+          "100%": { transform: "translateX(0)", opacity: 1 },
+        },
+      },
+      fontFamily: {
+        primary: ["Inter", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

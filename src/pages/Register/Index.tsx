@@ -1,16 +1,68 @@
-import React from "react";
-import { FormContainer } from "../../components/Form/FormContainer/Index";
 import { Input } from "../../components/Form/Input/Index";
 import { Button } from "../../components/Button/Index";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const FormRegisterUserSchema = z.object({
+  name: z.string().nonempty("O campo precisa ser preenchido!"),
+  email: z
+    .string()
+    .nonempty("O campo precisa ser preenchido!")
+    .email("O formato do e-mail está incorreto!"),
+  password: z
+    .string()
+    .min(5, "o campo precisa ter no mínimo 5 caracteres!")
+    .nonempty("O campo precisa ser preenchido!"),
+});
+
+type FormRegisterUserData = z.infer<typeof FormRegisterUserSchema>;
 
 export const Register = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormRegisterUserData>({
+    resolver: zodResolver(FormRegisterUserSchema),
+  });
+
+  function onFormSubmit(data: FormRegisterUserData) {
+    console.log(data);
+  }
+
   return (
     <section className="w-screen h-screen flex justify-center items-center fade-right">
-      <FormContainer title="criar conta">
-        <Input label="nome" />
-        <Input label="email" type="email" />
-        <Input label="senha" type="password" />
+      <form
+        className="p-6 border border-slate-400 flex flex-col rounded-lg w-[400px]"
+        onSubmit={handleSubmit(onFormSubmit)}
+      >
+        <h1 className="font-bold text-2xl mb-4 mx-auto capitalize">
+          Criar conta
+        </h1>
+        <Input
+          placeholder="Seu nome"
+          label="nome"
+          name="name"
+          register={register}
+          errors={errors.name?.message}
+        />
+        <Input
+          placeholder="email@example.com"
+          label="email"
+          name="email"
+          register={register}
+          errors={errors.email?.message}
+        />
+        <Input
+          placeholder="••••••••"
+          type="password"
+          label="senha"
+          name="password"
+          register={register}
+          errors={errors.password?.message}
+        />
         <Button>Criar conta</Button>
         <p className="mt-4 mx-auto">
           Já possui uma conta?{" "}
@@ -18,7 +70,7 @@ export const Register = () => {
             Logar
           </Link>{" "}
         </p>
-      </FormContainer>
+      </form>
     </section>
   );
 };

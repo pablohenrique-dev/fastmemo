@@ -1,27 +1,58 @@
-import React from "react";
 import { Button } from "../../components/Button/Index";
 import { Input } from "../../components/Form/Input/Index";
 import { Link } from "react-router-dom";
-import { FormContainer } from "../../components/Form/FormContainer/Index";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const FormUserLoginSchema = z.object({
+  email: z
+    .string()
+    .nonempty("O campo precisa ser preenchido!")
+    .email("O formato do e-mail está incorreto!"),
+  password: z
+    .string()
+    .min(5, "o campo precisa ter no mínimo 5 caracteres!")
+    .nonempty("O campo precisa ser preenchido!"),
+});
+
+type FormUserLoginData = z.infer<typeof FormUserLoginSchema>;
 
 export const Login = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormUserLoginData>({
+    resolver: zodResolver(FormUserLoginSchema),
+  });
+
+  function onFormSubmit(data: FormUserLoginData) {
+    console.log(data);
+  }
+
   return (
     <section className="flex flex-col justify-center items-center w-screen h-screen fade-right">
-      <FormContainer title="logar">
+      <form
+        className="p-6 border border-slate-400 flex flex-col rounded-lg w-[400px]"
+        onSubmit={handleSubmit(onFormSubmit)}
+      >
+        <h1 className="font-bold text-2xl mb-4 mx-auto capitalize">Login</h1>
         <Input
-          value={email}
           placeholder="email@example.com"
-          onChange={({ target }) => setEmail(target.value)}
           label="email"
+          name="email"
+          register={register}
+          errors={errors.email?.message}
         />
+
         <Input
-          value={password}
           placeholder="••••••••"
           type="password"
-          onChange={({ target }) => setPassword(target.value)}
           label="senha"
+          name="password"
+          register={register}
+          errors={errors.password?.message}
         />
         <Button>Entrar</Button>
         <p className="mt-4 mx-auto">
@@ -30,7 +61,7 @@ export const Login = () => {
             Criar conta
           </Link>{" "}
         </p>
-      </FormContainer>
+      </form>
     </section>
   );
 };

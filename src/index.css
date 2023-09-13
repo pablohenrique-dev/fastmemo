@@ -21,6 +21,10 @@
   .fade-right {
     @apply animate-[fadeRight_.3s_ease-in_forwards];
   }
+
+  .rotate {
+    @apply animate-[rotate_1s_infinite_linear];
+  }
 }
 
 .active {

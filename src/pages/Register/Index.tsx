@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { ErrorComponent } from "../../components/Error/Index";
 
 const FormRegisterUserSchema = z.object({
   name: z.string().nonempty("O campo precisa ser preenchido!"),
@@ -27,15 +29,18 @@ export const Register = () => {
   } = useForm<FormRegisterUserData>({
     resolver: zodResolver(FormRegisterUserSchema),
   });
+  const { registerUser, error } = useAuthContext();
 
   function onFormSubmit(data: FormRegisterUserData) {
-    console.log(data);
+    const { name, email, password } = data;
+    registerUser(name, email, password);
   }
 
+  // if (logged) return <Navigate to="/" />;
   return (
-    <section className="w-screen h-screen flex justify-center items-center fade-right">
+    <section className="flex flex-col justify-center items-center w-screen h-screen">
       <form
-        className="p-6 border border-slate-400 flex flex-col rounded-lg w-[400px]"
+        className="p-6 border border-slate-400 flex flex-col rounded-lg w-[400px] fade-right"
         onSubmit={handleSubmit(onFormSubmit)}
       >
         <h1 className="font-bold text-2xl mb-4 mx-auto capitalize">
@@ -71,6 +76,7 @@ export const Register = () => {
           </Link>{" "}
         </p>
       </form>
+      {error && <ErrorComponent>Este email já está em uso</ErrorComponent>}
     </section>
   );
 };

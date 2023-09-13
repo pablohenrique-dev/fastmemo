@@ -1,8 +1,10 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { House, ChartPie, SignOut } from "@phosphor-icons/react";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export const Navbar = () => {
+  const { logout } = useAuthContext();
   return (
     <nav className="p-6 flex flex-col justify-between h-screen border-r border-slate-default sticky top-0 left-0">
       <div className="fade-right">
@@ -18,7 +20,7 @@ export const Navbar = () => {
           Estatísticas
         </NavLink>
       </div>
-      <button className="nav-link fade-right">
+      <button onClick={logout} className="nav-link fade-right">
         <SignOut size={24} color="#656D76" />
         Sair
       </button>

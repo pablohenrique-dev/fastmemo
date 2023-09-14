@@ -6,16 +6,22 @@ import { Login } from "./pages/Login/Index";
 import { Register } from "./pages/Register/Index";
 import { ProtectedRoute } from "./utils/ProtectedRoute";
 import { useAuthContext } from "./contexts/AuthContext";
+import { SplashScreen } from "./components/SplashScreen/Index";
+import { Account } from "./pages/Account/Index";
 
 function App() {
   const { pathname } = useLocation();
-  const { logged } = useAuthContext();
+  const { logged, user } = useAuthContext();
 
   return (
     <section className="grid grid-cols-[250px_auto]">
       {pathname !== "/criar-conta" && pathname !== "/login" && logged && (
         <Navbar />
       )}
+      {pathname !== "/criar-conta" && logged && (
+        <SplashScreen user={user?.name} />
+      )}
+
       <Routes>
         <Route
           path="/"
@@ -30,6 +36,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Stats />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/minha-conta"
+          element={
+            <ProtectedRoute>
+              <Account />
             </ProtectedRoute>
           }
         />

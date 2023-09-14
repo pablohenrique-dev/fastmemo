@@ -36,7 +36,6 @@ export const Register = () => {
     registerUser(name, email, password);
   }
 
-  // if (logged) return <Navigate to="/" />;
   return (
     <section className="flex flex-col justify-center items-center w-screen h-screen">
       <form

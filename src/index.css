@@ -11,7 +11,7 @@
 
 @layer components {
   .nav-link {
-    @apply flex gap-2 items-center pl-3 pr-4 py-2 mb-2 border-l-4 border-white rounded text-lg;
+    @apply flex gap-2 items-center pl-3 pr-4 py-2 mb-2 rounded text-lg;
   }
 
   .border-slate-default {
@@ -22,14 +22,21 @@
     @apply animate-[fadeRight_.3s_ease-in_forwards];
   }
 
+  .fade-top {
+    @apply animate-[fadeTop_3.5s_ease-out_forwards];
+  }
+
   .rotate {
     @apply animate-[rotate_1s_infinite_linear];
+  }
+
+  .wave {
+    @apply animate-[wave_3s_linear];
   }
 }
 
 .active {
-  background: #f0f2f4;
-  color: rgb(9 9 11);
-  border-left: 4px solid rgb(37, 99, 235);
+  background: #000000;
+  color: rgb(253, 253, 253);
   font-weight: 600;
 }

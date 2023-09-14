@@ -71,12 +71,12 @@ export const Register = () => {
         <Button>Criar conta</Button>
         <p className="mt-4 mx-auto">
           Já possui uma conta?{" "}
-          <Link to="/login" className="font-semibold">
+          <Link to="/login" className="font-semibold underline">
             Logar
           </Link>{" "}
         </p>
       </form>
-      {error && <ErrorComponent>Este email já está em uso</ErrorComponent>}
+      {error && <ErrorComponent>{error}</ErrorComponent>}
     </section>
   );
 };

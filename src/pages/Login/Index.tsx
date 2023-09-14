@@ -62,12 +62,12 @@ export const Login = () => {
         <Button>Entrar</Button>
         <p className="mt-4 mx-auto">
           Não possui uma conta?{" "}
-          <Link to="/criar-conta" className="font-semibold">
+          <Link to="/criar-conta" className="font-semibold underline">
             Criar conta
           </Link>{" "}
         </p>
       </form>
-      {error && <ErrorComponent>E-mail e/ou senha incorreto!</ErrorComponent>}
+      {error && <ErrorComponent>{error}</ErrorComponent>}
     </section>
   );
 };

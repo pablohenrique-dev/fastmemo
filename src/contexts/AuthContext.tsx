@@ -31,11 +31,15 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
   async function login(email: string, password: string) {
     const response = await USER_LOGIN(email, password);
-    if (typeof response === "string") {
+    if (response.status === 401) {
+      setError(response.message);
+      setLogged(false);
+      setUser(null);
+    } else if (typeof response === "string") {
       setError(response);
       setLogged(false);
       setUser(null);
-    } else if (typeof response === "object") {
+    } else if (response.data.user && response.data.token) {
       setUser(response.data.user);
       setLogged(true);
       setError(null);
@@ -45,11 +49,15 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
   async function registerUser(name: string, email: string, password: string) {
     const response = await USER_REGISTER(name, email, password);
-    if (typeof response === "string") {
+    if (response.status === 400) {
+      setError(response.message);
+      setLogged(false);
+      setUser(null);
+    } else if (typeof response === "string") {
       setError(response);
       setLogged(false);
       setUser(null);
-    } else if (typeof response === "object") {
+    } else if (response.status === 201) {
       login(email, password);
     }
   }
@@ -65,13 +73,18 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
       const storedToken = localStorage.getItem(token);
       if (storedToken) {
         const response = await VALIDATE_TOKEN(storedToken);
-        if (typeof response === "string") {
+        if (response.status === 401) {
+          setError("Faça login novamente!");
+          setLogged(false);
+          setUser(null);
+        } else if (typeof response === "string") {
           setError(response);
           setLogged(false);
           setUser(null);
-        } else if (typeof response === "object") {
+        } else if (response.status === 201) {
           setUser(response.data);
           setLogged(true);
+          setError(null);
         }
       } else {
         setLogged(false);

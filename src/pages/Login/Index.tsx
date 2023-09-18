@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { ErrorComponent } from "../../components/Error/Index";
+import { AlertComponent } from "../../components/Error/Index";
 
 const FormUserLoginSchema = z.object({
   email: z
@@ -67,7 +67,7 @@ export const Login = () => {
           </Link>{" "}
         </p>
       </form>
-      {error && <ErrorComponent>{error}</ErrorComponent>}
+      {error && <AlertComponent status="error">{error}</AlertComponent>}
     </section>
   );
 };

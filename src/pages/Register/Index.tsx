@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { ErrorComponent } from "../../components/Error/Index";
+import { AlertComponent } from "../../components/Error/Index";
 
 const FormRegisterUserSchema = z.object({
   name: z.string().nonempty("O campo precisa ser preenchido!"),
@@ -75,7 +75,7 @@ export const Register = () => {
           </Link>{" "}
         </p>
       </form>
-      {error && <ErrorComponent>{error}</ErrorComponent>}
+      {error && <AlertComponent status="error">{error}</AlertComponent>}
     </section>
   );
 };

@@ -5,6 +5,7 @@ import { USER_LOGIN, USER_REGISTER, VALIDATE_TOKEN } from "../services/api";
 interface AuthContextType {
   user: User | null;
   logged: boolean | null;
+  setLogged: React.Dispatch<React.SetStateAction<boolean | null>>;
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
   registerUser: (
@@ -96,7 +97,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
   return (
     <AuthConext.Provider
-      value={{ user, login, logout, registerUser, logged, error }}
+      value={{ user, login, logout, registerUser, logged, setLogged, error }}
     >
       {children}
     </AuthConext.Provider>

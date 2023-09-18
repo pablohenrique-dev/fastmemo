@@ -76,3 +76,35 @@ export async function VALIDATE_TOKEN(token: string) {
     }
   }
 }
+
+export async function UPDATE_USER(
+  name: string,
+  email: string,
+  old_password: string,
+  password: string,
+  token: string
+) {
+  try {
+    const { status } = await api.put(
+      "/users",
+      {
+        name,
+        email,
+        old_password,
+        password,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return status;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        return error.response.data;
+      } else {
+        return error.message;
+      }
+    } else {
+      return "Um erro inesperado ocorreu!";
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { User } from "../@types/global";
 import { USER_LOGIN, USER_REGISTER, VALIDATE_TOKEN } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
   user: User | null;
@@ -29,6 +30,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
   const [logged, setLogged] = React.useState<boolean | null>(null);
   const [error, setError] = React.useState<string | null>(null);
   const token = "tokenUser";
+  const navigate = useNavigate();
 
   async function login(email: string, password: string) {
     const response = await USER_LOGIN(email, password);
@@ -59,7 +61,8 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
       setLogged(false);
       setUser(null);
     } else if (response.status === 201) {
-      login(email, password);
+      await login(email, password);
+      navigate("/");
     }
   }
 
@@ -82,7 +85,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
           setError(response);
           setLogged(false);
           setUser(null);
-        } else if (response.status === 201) {
+        } else if (response.status === 200) {
           setUser(response.data);
           setLogged(true);
           setError(null);

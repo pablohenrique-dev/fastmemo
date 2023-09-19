@@ -41,7 +41,7 @@ export async function USER_REGISTER(
   password: string
 ) {
   try {
-    const { data, status } = await api.post<RegisterUserResponse>("/users", {
+    const { data, status } = await api.post<RegisterUserResponse>("/user", {
       name,
       email,
       password,
@@ -86,7 +86,7 @@ export async function UPDATE_USER(
 ) {
   try {
     const { status } = await api.put(
-      "/users",
+      "/user",
       {
         name,
         email,

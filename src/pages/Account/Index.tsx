@@ -60,7 +60,7 @@ export const Account = () => {
       if (response.status === 400) {
         setError(response.message);
         setMessage(null);
-      } else if (response === 200) {
+      } else if (response === 201) {
         setError(null);
         setMessage("Usuário atualizado com sucesso!");
         setTimeout(() => {

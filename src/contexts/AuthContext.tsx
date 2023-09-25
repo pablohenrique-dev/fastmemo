@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
   async function login(email: string, password: string) {
     const response = await USER_LOGIN(email, password);
-    if (response.status === 401) {
+    if (response.status === "error") {
       setError(response.message);
       setLogged(false);
       setUser(null);
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
   async function registerUser(name: string, email: string, password: string) {
     const response = await USER_REGISTER(name, email, password);
-    if (response.status === 400) {
+    if (response.status === "error") {
       setError(response.message);
       setLogged(false);
       setUser(null);
@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
       const storedToken = localStorage.getItem(token);
       if (storedToken) {
         const response = await VALIDATE_TOKEN(storedToken);
-        if (response.status === 401) {
+        if (response.status === "error") {
           setError("Faça login novamente!");
           setLogged(false);
           setUser(null);
@@ -96,6 +96,11 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
       }
     }
     autoLogin();
+    const timeOut = setTimeout(() => {
+      setError(null);
+    }, 5000);
+
+    return () => clearTimeout(timeOut);
   }, []);
 
   return (

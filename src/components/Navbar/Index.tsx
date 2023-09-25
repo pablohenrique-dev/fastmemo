@@ -1,5 +1,4 @@
-import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   House,
   ChartPie,
@@ -7,6 +6,7 @@ import {
   UserCircleGear,
 } from "@phosphor-icons/react";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { NavLinkComponent } from "../NavLink/Index";
 
 export const Navbar = () => {
   const { logout } = useAuthContext();
@@ -16,20 +16,20 @@ export const Navbar = () => {
         <Link className="text-xl font-bold mb-8 inline-block" to="/">
           FASTMEMO
         </Link>
-        <NavLink to="/" className="nav-link">
+        <NavLinkComponent to="/">
           <House size={24} />
           Início
-        </NavLink>
-        <NavLink to="/estatisticas" className="nav-link">
+        </NavLinkComponent>
+        <NavLinkComponent to="/estatisticas?q=asdasd">
           <ChartPie size={24} />
           Estatísticas
-        </NavLink>
+        </NavLinkComponent>
       </div>
       <div>
-        <NavLink to="/minha-conta" className="nav-link">
+        <NavLinkComponent to="/minha-conta">
           <UserCircleGear size={26} />
           Minha conta
-        </NavLink>
+        </NavLinkComponent>
         <button onClick={logout} className="nav-link fade-right">
           <SignOut size={24} />
           Sair

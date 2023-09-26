@@ -8,13 +8,14 @@ import { ProtectedRoute } from "./utils/ProtectedRoute";
 import { useAuthContext } from "./contexts/AuthContext";
 import { SplashScreen } from "./components/SplashScreen/Index";
 import { Account } from "./pages/Account/Index";
+import { Deck } from "./pages/Deck/Index";
 
 function App() {
   const { pathname } = useLocation();
   const { logged, user } = useAuthContext();
 
   return (
-    <section className="grid grid-cols-[250px_auto]">
+    <section className="grid grid-cols-[200px_auto]  md:grid-cols-[250px_auto]">
       {pathname !== "/criar-conta" && pathname !== "/login" && logged && (
         <Navbar />
       )}
@@ -44,6 +45,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Account />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="decks/*"
+          element={
+            <ProtectedRoute>
+              <Deck />
             </ProtectedRoute>
           }
         />

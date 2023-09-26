@@ -1,25 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { formatDate } from "../../utils/formatDate";
 
 interface CardProps {
-  link: string;
+  infoCard: string;
+  title: string;
+  created_at: string;
 }
 
-export const Card = ({ link }: CardProps) => {
+export const Card = ({ infoCard, title, created_at }: CardProps) => {
   return (
     <Link
-      to={`/cards/${link}`}
+      to={`/decks/${infoCard}`}
       className="relative flex flex-col rounded-md overflow-hidden border border-slate-default"
     >
       <span className="text-black bg-white px-2 py-[2px] font-semibold text-sm absolute top-4 right-4 rounded-sm">
         Novo
       </span>
-      <div className="flex justify-center items-center w-full bg-black text-white font-bold italic text-3xl py-12">
-        Inglês
+      <div className="flex justify-center items-center w-full bg-black text-center text-white font-bold italic text-3xl py-12">
+        {title}
       </div>
       <div className="p-4">
-        <h2 className="text-black text-2xl font-bold mb-2 h-fit">Inglês</h2>
-        <span className="text-slate-700 text-xs">30/08/2023</span>
+        <h2 className="text-black text-2xl font-bold mb-2 h-fit">{title}</h2>
+        <span className="text-slate-700 text-xs">{formatDate(created_at)}</span>
       </div>
     </Link>
   );

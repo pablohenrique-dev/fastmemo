@@ -10,6 +10,13 @@ import { NavLinkComponent } from "../NavLink/Index";
 
 export const Navbar = () => {
   const { logout } = useAuthContext();
+
+  function logoutUser() {
+    const confirmLogOut = confirm("Deseja mesmo sair da conta?");
+    if (confirmLogOut) {
+      logout();
+    }
+  }
   return (
     <nav className="p-6 flex flex-col justify-between h-screen border-r border-slate-default sticky top-0 left-0">
       <div className="flex flex-col fade-right">
@@ -30,7 +37,7 @@ export const Navbar = () => {
           <UserCircleGear size={26} />
           Minha conta
         </NavLinkComponent>
-        <button onClick={logout} className="nav-link fade-right">
+        <button onClick={logoutUser} className="nav-link fade-right">
           <SignOut size={24} />
           Sair
         </button>

@@ -9,13 +9,8 @@ export const Home = () => {
 
   React.useEffect(() => {
     async function fetchDecks() {
-      const token = localStorage.getItem("tokenUser");
-      if (token) {
-        const response = await api.get<Deck[]>("/deck", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setDecks(response.data);
-      }
+      const response = await api.get<Deck[]>("/deck");
+      setDecks(response.data);
     }
     fetchDecks();
   }, []);

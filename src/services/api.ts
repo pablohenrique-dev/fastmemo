@@ -63,6 +63,7 @@ export async function USER_REGISTER(
 export async function VALIDATE_TOKEN(token: string) {
   try {
     const { data, status } = await api.post<User>("/validate", { token });
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`
     return { data, status };
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -36,9 +36,8 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
 
   async function onFormSubmit(data: FormCreateCardData) {
     const { front, back } = data;
-    const token = localStorage.getItem("tokenUser");
 
-    if (token && infoDeck) {
+    if (infoDeck) {
       const cardObj = {
         front: front.trim(),
         back: back.trim(),
@@ -47,9 +46,7 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
       };
 
       try {
-        await api.post("/card", cardObj, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await api.post("/card", cardObj);
         setMessageSuccess("Card cadastrado com sucesso!");
       } catch (error) {
         setError("Não foi possível cadastrar o card!");

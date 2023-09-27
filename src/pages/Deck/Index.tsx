@@ -26,13 +26,9 @@ export const Deck = () => {
       const deckId = arrayIdAndName[0];
       setTitleDeck(arrayIdAndName[1]);
 
-      const token = localStorage.getItem("tokenUser");
-
-      if (token && deckId) {
+      if (deckId) {
         try {
-          const response = await api.get<Card[]>(`/card/${deckId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          const response = await api.get<Card[]>(`/card/${deckId}`);
           setCards(response.data);
         } catch (error) {
           console.error(error);

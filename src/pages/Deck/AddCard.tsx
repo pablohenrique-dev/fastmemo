@@ -6,9 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../components/Button/Index";
 import { api } from "../../services/api";
 import { AlertComponent } from "../../components/Error/Index";
-import { decodeSpecialString } from "../../utils/handleString";
 import { Deck } from "../../@types/global";
-import { formatDate } from "../../utils/formatDate";
+import { formatDate } from "../../utils/handleDate";
 import { Loading } from "../../components/Loading/Index";
 
 const FormCreateCardSchema = z.object({

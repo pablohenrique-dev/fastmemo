@@ -1,6 +1,5 @@
-import React from "react";
 import { api } from "../../services/api";
-import { formatDate } from "../../utils/formatDate";
+import { formatDate } from "../../utils/handleDate";
 import { AlertComponent } from "../../components/Error/Index";
 import { limitString } from "../../utils/handleString";
 import { Card } from "../../@types/global";
@@ -26,7 +25,7 @@ export const CardList = ({ infoDeck, cards }: CardListProps) => {
               Criação
             </th>
             <th className="rounded-tr p-2 pl-4 text-left w-[250px]">
-              Atualização
+              Próxima revisão
             </th>
           </tr>
         </thead>
@@ -51,7 +50,7 @@ export const CardList = ({ infoDeck, cards }: CardListProps) => {
                           {formatDate(card.created_at)}
                         </td>
                         <td className="p-2 pl-4 text-left">
-                          {formatDate(card.updated_at)}
+                          {formatDate(card.next_review)}
                         </td>
                       </>
                     }

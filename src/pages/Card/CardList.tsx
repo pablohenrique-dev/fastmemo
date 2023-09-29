@@ -1,15 +1,39 @@
+import React from "react";
 import { api } from "../../services/api";
 import { formatDate } from "../../utils/handleDate";
-import { AlertComponent } from "../../components/Error/Index";
 import { limitString } from "../../utils/handleString";
 import { Card } from "../../@types/global";
+import { Loading } from "../../components/Loading/Index";
 
 interface CardListProps {
   infoDeck: string | null;
-  cards: Card[] | null;
 }
 
-export const CardList = ({ infoDeck, cards }: CardListProps) => {
+export const CardList = ({ infoDeck }: CardListProps) => {
+  const [cards, setCards] = React.useState<Card[] | null>(null);
+
+  React.useEffect(() => {
+    async function fetchCards() {
+      if (!infoDeck) return;
+      const deckId = infoDeck.split("@")[0];
+      try {
+        const { data } = await api.get<Card[]>(`/card/${deckId}`);
+        setCards(data);
+      } catch (error) {
+        console.error(error);
+        setCards(null);
+      }
+    }
+    fetchCards();
+  }, [infoDeck]);
+
+  if (cards === null)
+    return (
+      <div className="relative">
+        {" "}
+        <Loading />
+      </div>
+    );
   if (cards?.length === 0)
     return (
       <h3 className="fade-right text-xl">

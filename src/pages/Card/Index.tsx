@@ -6,37 +6,20 @@ import { AddCard } from "./AddCard";
 import { CardList } from "./CardList";
 import { ReviewCard } from "./ReviewCard";
 import { decodeSpecialString } from "../../utils/handleString";
-import { Card } from "../../@types/global";
-import { api } from "../../services/api";
 
 export const Deck = () => {
   const [infoDeck, setInfoDeck] = React.useState<string | null>(null);
   const [titleDeck, setTitleDeck] = React.useState<string | null>(null);
-  const [cards, setCards] = React.useState<Card[] | null>(null);
 
   React.useEffect(() => {
-    async function fetchCards() {
-      const pathname = window.location.pathname;
-      const [baseUrl, path, idAndName] = pathname.split("/");
+    const pathname = window.location.pathname;
+    const [baseUrl, path, idAndName] = pathname.split("/");
 
-      //idAndName -> number@deck-name
-      setInfoDeck(idAndName);
+    setInfoDeck(idAndName);
 
-      const arrayIdAndName = idAndName.split("@");
-      const deckId = arrayIdAndName[0];
-      setTitleDeck(arrayIdAndName[1]);
-
-      if (deckId) {
-        try {
-          const response = await api.get<Card[]>(`/card/${deckId}`);
-          setCards(response.data);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    }
-    fetchCards();
-  }, [infoDeck]);
+    const arrayIdAndName = idAndName.split("@");
+    setTitleDeck(arrayIdAndName[1]);
+  }, []);
 
   return (
     <div className="p-6 fade-right">
@@ -58,13 +41,10 @@ export const Deck = () => {
         </NavLinkComponent>
       </nav>
       <Routes>
-        <Route
-          path="/:infoDeck"
-          element={<CardList cards={cards} infoDeck={infoDeck} />}
-        />
+        <Route path="/:infoDeck" element={<CardList infoDeck={infoDeck} />} />
         <Route
           path="/:infoDeck/revisar"
-          element={<ReviewCard cards={cards} infoDeck={infoDeck} />}
+          element={<ReviewCard infoDeck={infoDeck} />}
         />
         <Route
           path="/:infoDeck/adicionar-card"

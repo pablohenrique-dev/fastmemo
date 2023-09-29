@@ -10,6 +10,12 @@ interface CardListProps {
 }
 
 export const CardList = ({ infoDeck, cards }: CardListProps) => {
+  if (cards?.length === 0)
+    return (
+      <h3 className="fade-right text-xl">
+        Esse baralho ainda não possui cards! 😭
+      </h3>
+    );
   return (
     <div className="fade-right">
       <table className="w-full">
@@ -59,11 +65,6 @@ export const CardList = ({ infoDeck, cards }: CardListProps) => {
             })}
         </tbody>
       </table>
-      {cards?.length === 0 && (
-        <AlertComponent status="error">
-          Esse baralho ainda não possui cards!
-        </AlertComponent>
-      )}
     </div>
   );
 };

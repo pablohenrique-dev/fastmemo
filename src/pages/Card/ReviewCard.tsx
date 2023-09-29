@@ -2,7 +2,11 @@ import React from "react";
 import { api } from "../../services/api";
 import { Button } from "../../components/Button/Index";
 import { Card } from "../../@types/global";
-import { calculateNextReview } from "../../utils/handleDate";
+import {
+  calculateNextReview,
+  simplifyReturnedDate,
+} from "../../utils/handleDate";
+import { ArrowLeft } from "@phosphor-icons/react";
 
 interface ReviewCardProps {
   infoDeck: string | null;
@@ -13,7 +17,9 @@ export const ReviewCard = ({ infoDeck, cards }: ReviewCardProps) => {
   const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
   const [display, setDisplay] = React.useState(false);
   const cardsToReviewToday = cards?.filter(
-    (card) => new Date(card.next_review).getTime() <= new Date().getTime()
+    (card) =>
+      simplifyReturnedDate(card.next_review) <=
+      simplifyReturnedDate(new Date().toISOString())
   );
 
   async function updateNextReviewCard(
@@ -31,18 +37,19 @@ export const ReviewCard = ({ infoDeck, cards }: ReviewCardProps) => {
 
   async function handleNextCard(
     indexCard: number,
-    cardNextReview: string,
     nextReviewController: number
   ) {
-    const dateNextReview = calculateNextReview(
-      cardNextReview,
-      nextReviewController
-    );
+    const dateNextReview = calculateNextReview(nextReviewController);
 
     await updateNextReviewCard(indexCard, dateNextReview);
 
     setDisplay(false);
     setCurrentCardIndex((index) => index + 1);
+  }
+
+  function handlePreviousCard() {
+    if (currentCardIndex === 0) return;
+    setCurrentCardIndex((index) => index - 1);
   }
 
   if (cardsToReviewToday?.length === 0) {
@@ -82,6 +89,7 @@ export const ReviewCard = ({ infoDeck, cards }: ReviewCardProps) => {
                   {display && (
                     <>
                       <hr className="mt-4 mb-4" />
+
                       <h3 className="fade-right text-xl text-neutral-600">
                         {card.back}
                       </h3>
@@ -89,36 +97,31 @@ export const ReviewCard = ({ infoDeck, cards }: ReviewCardProps) => {
                   )}
                 </div>
                 {!display && (
-                  <Button onClick={() => setDisplay(true)}>Ver resposta</Button>
+                  <div className="flex gap-4">
+                    <button
+                      onClick={handlePreviousCard}
+                      className="border border-slate-default rounded px-4 hover:bg-black hover:text-white hover:border-black transition-all"
+                      title="Volta para o card anterior"
+                    >
+                      <ArrowLeft size={24} />
+                    </button>
+                    <Button onClick={() => setDisplay(true)}>
+                      Ver resposta
+                    </Button>
+                  </div>
                 )}
                 {display && (
                   <div className="fade-right grid grid-cols-4 gap-4">
-                    <Button
-                      onClick={() =>
-                        handleNextCard(card.id, card.next_review, 0)
-                      }
-                    >
+                    <Button onClick={() => handleNextCard(card.id, 0)}>
                       Resetar
                     </Button>
-                    <Button
-                      onClick={() =>
-                        handleNextCard(card.id, card.next_review, 1)
-                      }
-                    >
+                    <Button onClick={() => handleNextCard(card.id, 1)}>
                       Difícil
                     </Button>
-                    <Button
-                      onClick={() =>
-                        handleNextCard(card.id, card.next_review, 3)
-                      }
-                    >
+                    <Button onClick={() => handleNextCard(card.id, 3)}>
                       Bom
                     </Button>
-                    <Button
-                      onClick={() =>
-                        handleNextCard(card.id, card.next_review, 5)
-                      }
-                    >
+                    <Button onClick={() => handleNextCard(card.id, 5)}>
                       Fácil
                     </Button>
                   </div>

@@ -44,7 +44,7 @@ export const Deck = () => {
         Baralho{titleDeck && ": " + decodeSpecialString(titleDeck)}
       </h2>
       <nav className="flex gap-2 mb-6 pb-4 border-b border-slate-default">
-        <NavLinkComponent to={`/decks/${infoDeck}`} end={true}>
+        <NavLinkComponent to={`/cards/${infoDeck}`} end={true}>
           <Cards size={20} />
           Todos os cards
         </NavLinkComponent>

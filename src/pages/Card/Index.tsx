@@ -6,6 +6,8 @@ import { AddCard } from "./AddCard";
 import { CardList } from "./CardList";
 import { ReviewCard } from "./ReviewCard";
 import { decodeSpecialString } from "../../utils/handleString";
+import { UpdateCard } from "./UpdateCard";
+import { Head } from "../../utils/Head";
 
 export const Deck = () => {
   const [infoDeck, setInfoDeck] = React.useState<string | null>(null);
@@ -23,6 +25,10 @@ export const Deck = () => {
 
   return (
     <div className="p-6 fade-right">
+      <Head
+        title={decodeSpecialString(titleDeck!)}
+        description="Faça sua revisão diária de cards."
+      />
       <h2 className="text-[32px] font-semibold text-black mb-3">
         Baralho{titleDeck && ": " + decodeSpecialString(titleDeck)}
       </h2>
@@ -49,6 +55,10 @@ export const Deck = () => {
         <Route
           path="/:infoDeck/adicionar-card"
           element={<AddCard infoDeck={infoDeck} />}
+        />
+        <Route
+          path="/:infoDeck/atualizar-card"
+          element={<UpdateCard infoDeck={infoDeck} />}
         />
       </Routes>
     </div>

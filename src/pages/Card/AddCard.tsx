@@ -36,11 +36,15 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
   async function onFormSubmit(data: FormCreateCardData) {
     const { front, back } = data;
 
+    const currentDate = new Date();
+
+    currentDate.setHours(0, 0, 0, 0);
+
     if (infoDeck) {
       const cardObj = {
         front: front.trim(),
         back: back.trim(),
-        next_review: new Date().toISOString(),
+        next_review: currentDate.toISOString(),
         deckId: +infoDeck.split("@")[0],
       };
 

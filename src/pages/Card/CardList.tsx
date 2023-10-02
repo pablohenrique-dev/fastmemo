@@ -4,6 +4,8 @@ import { formatDate } from "../../utils/handleDate";
 import { limitString } from "../../utils/handleString";
 import { Card } from "../../@types/global";
 import { Loading } from "../../components/Loading/Index";
+import { ArrowsClockwise, Trash } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 
 interface CardListProps {
   infoDeck: string | null;
@@ -11,6 +13,19 @@ interface CardListProps {
 
 export const CardList = ({ infoDeck }: CardListProps) => {
   const [cards, setCards] = React.useState<Card[] | null>(null);
+
+  async function deleteCard(idCard: number) {
+    if (cards === null) return;
+    const confirmDeleteCard = confirm("Deseja realmente excluír esse card?");
+    if (!confirmDeleteCard) return;
+
+    try {
+      await api.delete(`/card/${idCard}`);
+      setCards(cards.filter((card) => card.id !== idCard));
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   React.useEffect(() => {
     async function fetchCards() {
@@ -45,7 +60,10 @@ export const CardList = ({ infoDeck }: CardListProps) => {
       <table className="w-full">
         <thead>
           <tr className="bg-black text-white rounded-xl">
-            <th className="rounded-tl p-2 pl-4 text-left border-r-2 border-white">
+            <th className="rounded-tl py-2 text-left w-[50px] border-r-2 border-white">
+              <ArrowsClockwise size={22} className="mx-auto" />
+            </th>
+            <th className="p-2 pl-4 text-left border-r-2 border-white">
               Frente
             </th>
             <th className="p-2 pl-4 text-left border-r-2 border-white">
@@ -54,8 +72,14 @@ export const CardList = ({ infoDeck }: CardListProps) => {
             <th className="p-2 pl-4 text-left w-[250px] border-r-2 border-white">
               Criação
             </th>
-            <th className="rounded-tr p-2 pl-4 text-left w-[250px]">
+            <th className="p-2 pl-4 text-left w-[250px] border-r-2 border-white">
               Próxima revisão
+            </th>
+            <th
+              aria-label="Deletar card"
+              className="rounded-tr py-2 text-left w-[50px]"
+            >
+              <Trash size={22} className="mx-auto" />
             </th>
           </tr>
         </thead>
@@ -70,17 +94,35 @@ export const CardList = ({ infoDeck }: CardListProps) => {
                   >
                     {
                       <>
-                        <td className="p-2 pl-4 text-left border-r-2 border-white ">
+                        <td>
+                          <Link
+                            to={`atualizar-card?idCard=${card.id}`}
+                            className="block py-2 text-green-600 w-full h-max hover:bg-green-600 hover:text-white transition"
+                            title="Atualizar card"
+                          >
+                            <ArrowsClockwise size={22} className="mx-auto" />
+                          </Link>
+                        </td>
+                        <td className="m-2 pl-4 text-left border-r-2 border-white ">
                           {limitString(card.front, 25)}
                         </td>
-                        <td className="p-2 pl-4 text-left border-r-2 border-white">
+                        <td className="m-2 pl-4 text-left border-r-2 border-white">
                           {limitString(card.back, 25)}
                         </td>
-                        <td className="p-2 pl-4 text-left border-r-2 border-white">
+                        <td className="m-2 pl-4 text-left border-r-2 border-white">
                           {formatDate(card.created_at)}
                         </td>
-                        <td className="p-2 pl-4 text-left">
+                        <td className="m-2 pl-4 text-left">
                           {formatDate(card.next_review)}
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => deleteCard(card.id)}
+                            className="py-2 text-red-500 w-full h-max hover:bg-red-500 hover:text-white transition"
+                            title="deletar card"
+                          >
+                            <Trash size={22} className="mx-auto" />
+                          </button>
                         </td>
                       </>
                     }

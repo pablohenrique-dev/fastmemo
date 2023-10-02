@@ -21,6 +21,7 @@ export async function USER_LOGIN(email: string, password: string) {
       email,
       password,
     });
+    api.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
     return { data, status };
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -63,7 +64,7 @@ export async function USER_REGISTER(
 export async function VALIDATE_TOKEN(token: string) {
   try {
     const { data, status } = await api.post<User>("/validate", { token });
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     return { data, status };
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -8,7 +8,8 @@ import { ProtectedRoute } from "./utils/ProtectedRoute";
 import { useAuthContext } from "./contexts/AuthContext";
 import { SplashScreen } from "./components/SplashScreen/Index";
 import { Account } from "./pages/Account/Index";
-import { Deck } from "./pages/Deck/Index";
+import { Deck } from "./pages/Card/Index";
+import { AddDeck } from "./pages/Deck/AddDeck";
 
 function App() {
   const { pathname } = useLocation();
@@ -49,10 +50,18 @@ function App() {
           }
         />
         <Route
-          path="decks/*"
+          path="cards/*"
           element={
             <ProtectedRoute>
               <Deck />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="decks/adicionar"
+          element={
+            <ProtectedRoute>
+              <AddDeck />
             </ProtectedRoute>
           }
         />

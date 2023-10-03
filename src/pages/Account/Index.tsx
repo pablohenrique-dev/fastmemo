@@ -8,6 +8,7 @@ import { Button } from "../../components/Button/Index";
 import { ImageSquare } from "@phosphor-icons/react";
 import { UPDATE_USER } from "../../services/api";
 import { AlertComponent } from "../../components/Error/Index";
+import { Head } from "../../utils/Head";
 
 interface ImageState {
   preview: string;
@@ -92,6 +93,10 @@ export const Account = () => {
 
   return (
     <section className="p-6 w-full h-full">
+      <Head
+        title="Minha conta"
+        description="Veja as informações de sua conta."
+      />
       <div className="flex flex-col fade-right">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-[32px] font-semibold text-black">Minha conta</h2>
@@ -150,7 +155,7 @@ export const Account = () => {
               {img.preview ? (
                 <img
                   src={img.preview}
-                  className="absolute inset-0 aspect-square object-cover pointer-events-none "
+                  className="absolute inset-0 aspect-square object-cover pointer-events-none rounded-full"
                 />
               ) : (
                 <>

@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { AlertComponent } from "../../components/Error/Index";
+import { Head } from "../../utils/Head";
 
 const FormRegisterUserSchema = z.object({
   name: z.string().nonempty("O campo precisa ser preenchido!"),
@@ -38,6 +39,10 @@ export const Register = () => {
 
   return (
     <section className="flex flex-col justify-center items-center w-screen h-screen">
+      <Head
+        title="Criar conta"
+        description="Crie sua conta no sistema de repetição espaçada fastmemo"
+      />
       <form
         className="p-6 border border-slate-400 flex flex-col rounded-lg w-[400px] fade-right"
         onSubmit={handleSubmit(onFormSubmit)}

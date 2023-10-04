@@ -1,7 +1,6 @@
 import React from "react";
-import { Card } from "../../components/Card/Index";
+import { DeckComponent } from "../../components/DeckComponent/Index";
 import { api } from "../../services/api";
-import { sanitizeName } from "../../utils/handleString";
 import { Deck } from "../../@types/global";
 import { Plus } from "@phosphor-icons/react";
 import { NavLink } from "react-router-dom";
@@ -10,11 +9,11 @@ import { Head } from "../../utils/Head";
 export const Home = () => {
   const [decks, setDecks] = React.useState<Deck[] | null>(null);
 
-  async function deleteDeck(idDeck: number) {
+  async function deleteDeck(deckId: number) {
     if (!decks) return;
     try {
-      await api.delete(`deck/${idDeck}`);
-      const currentDecks = decks.filter((deck) => deck.id !== idDeck);
+      await api.delete(`deck/${deckId}`);
+      const currentDecks = decks.filter((deck) => deck.id !== deckId);
       setDecks(currentDecks);
     } catch (error) {
       console.error(error);
@@ -42,17 +41,17 @@ export const Home = () => {
         {decks &&
           decks.map((deck) => {
             return (
-              <Card
+              <DeckComponent
                 key={deck.id}
-                title={deck.name}
+                deckName={deck.name}
                 created_at={deck.created_at}
-                infoCard={`${deck.id}@${sanitizeName(deck.name)}`}
+                deckId={deck.id}
                 deleteDeck={deleteDeck}
               />
             );
           })}
         <NavLink
-          to="decks/adicionar"
+          to="adicionar-deck"
           className="flex flex-col justify-center items-center border border-dashed border-slate-default rounded-md hover:border-green-500 hover:border-2 font-semibold transition-all h-[229px]"
         >
           <Plus size={40} className="mb-2" />

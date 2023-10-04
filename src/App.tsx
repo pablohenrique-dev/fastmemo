@@ -10,6 +10,7 @@ import { SplashScreen } from "./components/SplashScreen/Index";
 import { Account } from "./pages/Account/Index";
 import { Deck } from "./pages/Card/Index";
 import { AddDeck } from "./pages/Deck/AddDeck";
+import { UpdateDeck } from "./pages/Deck/UpdateDeck";
 
 function App() {
   const { pathname } = useLocation();
@@ -58,10 +59,18 @@ function App() {
           }
         />
         <Route
-          path="decks/adicionar"
+          path="adicionar-deck"
           element={
             <ProtectedRoute>
               <AddDeck />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="atualizar-deck"
+          element={
+            <ProtectedRoute>
+              <UpdateDeck />
             </ProtectedRoute>
           }
         />

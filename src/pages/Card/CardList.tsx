@@ -4,7 +4,7 @@ import { formatDate } from "../../utils/handleDate";
 import { limitString } from "../../utils/handleString";
 import { Card } from "../../@types/global";
 import { Loading } from "../../components/Loading/Index";
-import { ArrowsClockwise, Trash } from "@phosphor-icons/react";
+import { ArrowClockwise, Trash } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
 interface CardListProps {
@@ -61,7 +61,7 @@ export const CardList = ({ infoDeck }: CardListProps) => {
         <thead>
           <tr className="bg-black text-white rounded-xl">
             <th className="rounded-tl py-2 text-left w-[50px] border-r-2 border-white">
-              <ArrowsClockwise size={22} className="mx-auto" />
+              <ArrowClockwise size={22} className="mx-auto" />
             </th>
             <th className="p-2 pl-4 text-left border-r-2 border-white">
               Frente
@@ -100,7 +100,7 @@ export const CardList = ({ infoDeck }: CardListProps) => {
                             className="block py-2 text-green-600 w-full h-max hover:bg-green-600 hover:text-white transition"
                             title="Atualizar card"
                           >
-                            <ArrowsClockwise size={22} className="mx-auto" />
+                            <ArrowClockwise size={22} className="mx-auto" />
                           </Link>
                         </td>
                         <td className="m-2 pl-4 text-left border-r-2 border-white ">

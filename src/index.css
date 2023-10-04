@@ -15,7 +15,7 @@
   }
 
   .border-slate-default {
-    @apply border-slate-400;
+    @apply border-neutral-500;
   }
 
   .fade-right {

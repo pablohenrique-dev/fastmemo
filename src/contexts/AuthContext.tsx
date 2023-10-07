@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
       setLogged(true);
       setError(null);
       localStorage.setItem(token, response.data.token);
+      navigate("/");
     }
   }
 
@@ -62,7 +63,6 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
       setUser(null);
     } else if (response.status === 201) {
       await login(email, password);
-      navigate("/");
     }
   }
 
@@ -70,6 +70,7 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
     setLogged(false);
     setUser(null);
     localStorage.removeItem(token);
+    navigate("/login");
   }
 
   React.useEffect(() => {
@@ -89,10 +90,12 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
           setUser(response.data);
           setLogged(true);
           setError(null);
+          navigate("/");
         }
       } else {
         setLogged(false);
         setUser(null);
+        navigate("/login");
       }
     }
     autoLogin();

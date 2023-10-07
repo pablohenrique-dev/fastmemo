@@ -108,6 +108,7 @@ export const Account = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-[auto_200px]">
           <form className="w-auto" onSubmit={handleSubmit(onFormSubmit)}>
             <Input
+              autoComplete="on"
               label="nome"
               name="name"
               register={register}
@@ -115,6 +116,7 @@ export const Account = () => {
               errors={errors.name?.message}
             />
             <Input
+              autoComplete="on"
               label="email"
               name="email"
               register={register}
@@ -122,6 +124,7 @@ export const Account = () => {
               errors={errors.email?.message}
             />
             <Input
+              autoComplete="off"
               placeholder="••••••••"
               label="senha"
               name="old_password"
@@ -130,6 +133,7 @@ export const Account = () => {
               errors={errors.old_password?.message}
             />
             <Input
+              autoComplete="off"
               placeholder="••••••••"
               label="nova senha"
               name="password"

@@ -82,6 +82,7 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
     <div className="grid grid-cols-2 gap-8 fade-right">
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Input
+          autoComplete="on"
           label="frente"
           name="front"
           placeholder="Frente do card"
@@ -89,6 +90,7 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
           errors={errors.front?.message}
         />
         <Input
+          autoComplete="on"
           label="verso"
           name="back"
           placeholder="Verso do card"

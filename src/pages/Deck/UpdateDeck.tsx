@@ -55,6 +55,7 @@ export const UpdateDeck = () => {
       />
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Input
+          autoComplete="on"
           label="nome"
           name="name"
           placeholder="Nome do deck"
@@ -62,7 +63,7 @@ export const UpdateDeck = () => {
           register={register}
           errors={errors.name?.message}
         />
-        <Button>Cadastrar</Button>
+        <Button>Atualizar</Button>
         {message && <AlertComponent status="success">{message}</AlertComponent>}
         {error && <AlertComponent status="error">{error}</AlertComponent>}
       </form>

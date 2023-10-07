@@ -1,6 +1,6 @@
 import { Button } from "../../components/Button/Index";
 import { Input } from "../../components/Form/Input/Index";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,14 +29,13 @@ export const Login = () => {
   } = useForm<FormUserLoginData>({
     resolver: zodResolver(FormUserLoginSchema),
   });
-  const { login, logged, error } = useAuthContext();
+  const { login, error } = useAuthContext();
 
   function onFormSubmit(data: FormUserLoginData) {
     const { email, password } = data;
     login(email, password);
   }
 
-  if (logged) return <Navigate to="/" />;
   return (
     <section className="flex flex-col justify-center items-center w-screen h-screen">
       <Head
@@ -49,6 +48,7 @@ export const Login = () => {
       >
         <h1 className="font-bold text-2xl mb-4 mx-auto capitalize">Login</h1>
         <Input
+          autoComplete="on"
           placeholder="email@example.com"
           label="email"
           name="email"
@@ -57,6 +57,7 @@ export const Login = () => {
         />
 
         <Input
+          autoComplete="off"
           placeholder="••••••••"
           type="password"
           label="senha"

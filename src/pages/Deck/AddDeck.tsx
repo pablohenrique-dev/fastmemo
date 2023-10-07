@@ -54,6 +54,7 @@ export const AddDeck = () => {
     <div className="p-6 fade-right">
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Input
+          autoComplete="on"
           label="nome"
           name="name"
           placeholder="Nome do deck"

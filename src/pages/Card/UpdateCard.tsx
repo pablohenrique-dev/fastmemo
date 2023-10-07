@@ -65,6 +65,7 @@ export const UpdateCard = ({ infoDeck }: { infoDeck: string | null }) => {
     <div className="fade-right">
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Input
+          autoComplete="on"
           label="Frente"
           name="front"
           placeholder="Frente do card"
@@ -73,6 +74,7 @@ export const UpdateCard = ({ infoDeck }: { infoDeck: string | null }) => {
           defaultValue={card?.front}
         />
         <Input
+          autoComplete="on"
           label="Verso"
           name="back"
           placeholder="Verso do card"

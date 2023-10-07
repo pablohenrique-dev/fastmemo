@@ -51,6 +51,7 @@ export const Register = () => {
           Criar conta
         </h1>
         <Input
+          autoComplete="on"
           placeholder="Seu nome"
           label="nome"
           name="name"
@@ -58,6 +59,7 @@ export const Register = () => {
           errors={errors.name?.message}
         />
         <Input
+          autoComplete="on"
           placeholder="email@example.com"
           label="email"
           name="email"
@@ -65,6 +67,7 @@ export const Register = () => {
           errors={errors.email?.message}
         />
         <Input
+          autoComplete="off"
           placeholder="••••••••"
           type="password"
           label="senha"

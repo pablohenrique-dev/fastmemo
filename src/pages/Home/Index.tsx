@@ -52,7 +52,7 @@ export const Home = () => {
           })}
         <NavLink
           to="adicionar-deck"
-          className="flex flex-col justify-center items-center border border-dashed border-slate-default rounded-md hover:border-green-500 hover:border-2 font-semibold transition-all h-[229px]"
+          className="flex flex-col justify-center items-center text-center border border-dashed border-slate-default rounded-md hover:border-green-500 hover:border-2 font-semibold transition-all min-h-[229px]"
         >
           <Plus size={40} className="mb-2" />
           Adicionar novo baralho

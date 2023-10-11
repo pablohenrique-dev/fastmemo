@@ -90,12 +90,10 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
           setUser(response.data);
           setLogged(true);
           setError(null);
-          navigate("/");
         }
       } else {
         setLogged(false);
         setUser(null);
-        navigate("/login");
       }
     }
     autoLogin();

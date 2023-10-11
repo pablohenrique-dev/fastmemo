@@ -1,6 +1,6 @@
 import { Input } from "../../components/Form/Input/Index";
 import { Button } from "../../components/Button/Index";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,13 +30,13 @@ export const Register = () => {
   } = useForm<FormRegisterUserData>({
     resolver: zodResolver(FormRegisterUserSchema),
   });
-  const { registerUser, error } = useAuthContext();
+  const { registerUser, error, logged } = useAuthContext();
 
   function onFormSubmit(data: FormRegisterUserData) {
     const { name, email, password } = data;
     registerUser(name, email, password);
   }
-
+  if (logged) return <Navigate to="/" />;
   return (
     <section className="flex flex-col justify-center items-center w-screen h-screen">
       <Head

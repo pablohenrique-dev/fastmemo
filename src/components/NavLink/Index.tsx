@@ -13,7 +13,7 @@ export const NavLinkComponent = ({
 }: NavLinkProps) => {
   return (
     <NavLink
-      className="flex gap-2 items-center px-4 py-2 mb-2 rounded text-lg"
+      className="whitespace-nowrap flex gap-2 items-center border border-black md:border-none px-4 py-2 mb-2 rounded text-base md:text-lg"
       to={to}
       end={end}
     >

@@ -79,7 +79,7 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
   }, [infoDeck]);
 
   return (
-    <div className="grid grid-cols-2 gap-8 fade-right">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 fade-right">
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Input
           autoComplete="on"

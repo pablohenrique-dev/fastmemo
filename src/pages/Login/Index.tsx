@@ -38,13 +38,13 @@ export const Login = () => {
 
   if (logged) return <Navigate to="/" />;
   return (
-    <section className="flex flex-col justify-center items-center w-screen h-screen">
+    <section className="flex flex-col justify-center items-center max-w-screen h-screen mt-[-64px]">
       <Head
         title="Login"
         description="Faça login no sistema de repetição espaçada fastmemo"
       />
       <form
-        className="p-6 border border-slate-400 flex flex-col rounded-lg w-[400px] fade-right"
+        className="p-6 border border-slate-400 flex flex-col rounded-lg w-[350px] max-[400px]:w-[320px] md:w-[400px] fade-right"
         onSubmit={handleSubmit(onFormSubmit)}
       >
         <h1 className="font-bold text-2xl mb-4 mx-auto capitalize">Login</h1>

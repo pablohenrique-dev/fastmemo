@@ -24,15 +24,15 @@ export const Deck = () => {
   }, []);
 
   return (
-    <div className="p-6 fade-right">
+    <div className="p-6 fade-right h-screen">
       <Head
         title={decodeSpecialString(titleDeck!)}
         description="Faça sua revisão diária de cards."
       />
-      <h2 className="text-[32px] font-semibold text-black mb-3">
+      <h2 className="text-2xl md:text-[32px] font-semibold text-black mb-3">
         Baralho{titleDeck && ": " + decodeSpecialString(titleDeck)}
       </h2>
-      <nav className="flex gap-2 mb-6 pb-4 border-b border-slate-default">
+      <nav className="flex gap-2 mb-6 pb-4 border-b border-slate-default overflow-auto">
         <NavLinkComponent to={`/cards/${infoDeck}`} end={true}>
           <Cards size={20} />
           Todos os cards

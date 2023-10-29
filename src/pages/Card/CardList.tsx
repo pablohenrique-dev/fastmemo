@@ -1,7 +1,6 @@
 import React from "react";
 import { api } from "../../services/api";
 import { formatDate } from "../../utils/handleDate";
-import { limitString } from "../../utils/handleString";
 import { Card } from "../../@types/global";
 import { Loading } from "../../components/Loading/Index";
 import { ArrowClockwise, Trash } from "@phosphor-icons/react";
@@ -45,7 +44,6 @@ export const CardList = ({ infoDeck }: CardListProps) => {
   if (cards === null)
     return (
       <div className="relative">
-        {" "}
         <Loading />
       </div>
     );
@@ -56,28 +54,28 @@ export const CardList = ({ infoDeck }: CardListProps) => {
       </h3>
     );
   return (
-    <div className="fade-right">
+    <div className="fade-right overflow-auto">
       <table className="w-full">
         <thead>
           <tr className="bg-black text-white rounded-xl">
-            <th className="rounded-tl py-2 text-left w-[50px] border-r-2 border-white">
+            <th className="rounded-tl p-2 text-left border-r-2 border-white">
               <ArrowClockwise size={22} className="mx-auto" />
             </th>
-            <th className="p-2 pl-4 text-left border-r-2 border-white">
+            <th className="whitespace-nowrap p-2 pl-4 text-left border-r-2 border-white max-w-[200px]">
               Frente
             </th>
-            <th className="p-2 pl-4 text-left border-r-2 border-white">
+            <th className="whitespace-nowrap p-2 pl-4 text-left border-r-2 border-white max-w-[200px]">
               Verso
             </th>
-            <th className="p-2 pl-4 text-left w-[250px] border-r-2 border-white">
+            <th className="whitespace-nowrap p-2 pl-4 text-left border-r-2 border-white">
               Criação
             </th>
-            <th className="p-2 pl-4 text-left w-[250px] border-r-2 border-white">
+            <th className="whitespace-nowrap p-2 pl-4 text-left border-r-2 border-white">
               Próxima revisão
             </th>
             <th
               aria-label="Deletar card"
-              className="rounded-tr py-2 text-left w-[50px]"
+              className="rounded-tr p-2 text-left w-[50px]"
             >
               <Trash size={22} className="mx-auto" />
             </th>
@@ -103,13 +101,13 @@ export const CardList = ({ infoDeck }: CardListProps) => {
                             <ArrowClockwise size={22} className="mx-auto" />
                           </Link>
                         </td>
-                        <td className="m-2 pl-4 text-left border-r-2 border-white ">
-                          {limitString(card.front, 25)}
+                        <td className="max-w-[200px] whitespace-nowrap overflow-hidden m-2 pl-4 text-left border-r-2 border-white text-ellipsis">
+                          {card.front}
                         </td>
-                        <td className="m-2 pl-4 text-left border-r-2 border-white">
-                          {limitString(card.back, 25)}
+                        <td className="max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis m-2 pl-4 text-left border-r-2 border-white">
+                          {card.back}
                         </td>
-                        <td className="m-2 pl-4 text-left border-r-2 border-white">
+                        <td className="m-2 px-4 py-2 text-left border-r-2 border-white">
                           {formatDate(card.created_at)}
                         </td>
                         <td className="m-2 pl-4 text-left">

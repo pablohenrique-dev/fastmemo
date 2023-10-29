@@ -94,10 +94,10 @@ export const ReviewCard = ({ infoDeck }: ReviewCardProps) => {
           else
             return (
               <div
-                className="flex flex-col justify-between h-[75%]"
+                className="flex flex-col justify-between min-h-[calc(100%-200px)] md:min-h-[calc(100%-140px)]"
                 key={card.id}
               >
-                <div>
+                <div className="flex flex-col">
                   <h3 className="fade-right text-xl text-neutral-600">
                     {card.front}
                   </h3>
@@ -112,12 +112,12 @@ export const ReviewCard = ({ infoDeck }: ReviewCardProps) => {
                   )}
                 </div>
                 {!display && (
-                  <div className="flex gap-6">
+                  <div className="flex flex-col gap-4 md:gap-6 md:flex-row">
                     <button
                       disabled={currentCardIndex === 0}
                       onClick={handlePreviousCard}
-                      className="border border-slate-default rounded px-4 flex items-center justify-center gap-4 w-full  hover:bg-black hover:text-white hover:border-black transition-all disabled:cursor-not-allowed disabled:text-neutral-600 disabled:hover:bg-white"
-                      title="Volta para o card anterior"
+                      className="whitespace-nowrap border border-slate-default rounded px-4 py-3 flex items-center justify-center gap-4 w-full  hover:bg-black hover:text-white hover:border-black transition-all disabled:cursor-not-allowed disabled:text-neutral-600 disabled:hover:bg-white"
+                      title="Voltar para o card anterior"
                     >
                       <ArrowLeft size={24} />
                       Card anterior
@@ -128,7 +128,7 @@ export const ReviewCard = ({ infoDeck }: ReviewCardProps) => {
                   </div>
                 )}
                 {display && (
-                  <div className="fade-right grid grid-cols-4 gap-4">
+                  <div className="fade-right grid grid-cols-4 gap-2 md:gap-4">
                     <Button onClick={() => handleNextCard(card.id, 0)}>
                       Resetar
                     </Button>

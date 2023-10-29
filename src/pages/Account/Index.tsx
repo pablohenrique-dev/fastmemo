@@ -98,10 +98,11 @@ export const Account = () => {
         description="Veja as informações de sua conta."
       />
       <div className="flex flex-col fade-right">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-[32px] font-semibold text-black">Minha conta</h2>
-          <p>
-            {" "}
+        <div className="flex items-end justify-between mb-6">
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-black">
+            Minha conta
+          </h2>
+          <p className="mb-1 text-sm md:mb-0 md:text-base">
             <strong>Criada em:</strong> 15/09/2023{" "}
           </p>
         </div>

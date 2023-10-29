@@ -1,3 +1,4 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { Home } from "../pages/Home/Index";
@@ -11,6 +12,7 @@ import { Register } from "../pages/Register/Index";
 import { ProtectedRoute } from "../utils/ProtectedRoute";
 import { Navbar } from "../components/Navbar/Index";
 import { SplashScreen } from "../components/SplashScreen/Index";
+import { Header } from "../components/Header/Index";
 
 const myRoutes = [
   { element: Home, path: "/" },
@@ -23,15 +25,18 @@ const myRoutes = [
 
 export const AppRoutes = () => {
   const { logged, user } = useAuthContext();
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <>
       {logged && (
         <>
-          <Navbar />
+          <Navbar isOpen={isOpen} setIsOpen={setIsOpen} />
+          <Header setIsOpen={setIsOpen} />
           <SplashScreen user={user?.name} />
         </>
       )}
+
       <Routes>
         {myRoutes.map((element) => {
           return (

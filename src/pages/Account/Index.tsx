@@ -98,7 +98,7 @@ export const Account = () => {
         description="Veja as informações de sua conta."
       />
       <div className="flex flex-col fade-right">
-        <div className="flex flex-col items-start gap-4 md:items-end md:justify-between mb-6">
+        <div className="flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between mb-6">
           <h2 className="text-[24px] md:text-[32px] font-semibold text-black">
             Minha conta
           </h2>

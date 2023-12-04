@@ -4,7 +4,8 @@ import { formatDate } from "../../utils/handleDate";
 import { Card } from "../../@types/global";
 import { Loading } from "../../components/Loading/Index";
 import { ArrowClockwise, Trash } from "@phosphor-icons/react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { SearchFilter } from "./components/SearchFilter";
 
 interface CardListProps {
   infoDeck: string | null;
@@ -12,6 +13,9 @@ interface CardListProps {
 
 export const CardList = ({ infoDeck }: CardListProps) => {
   const [cards, setCards] = React.useState<Card[] | null>(null);
+  const [searchParams] = useSearchParams();
+
+  const searchInputParam = searchParams.get("search");
 
   async function deleteCard(idCard: number) {
     if (cards === null) return;
@@ -31,7 +35,9 @@ export const CardList = ({ infoDeck }: CardListProps) => {
       if (!infoDeck) return;
       const deckId = infoDeck.split("@")[0];
       try {
-        const { data } = await api.get<Card[]>(`/card/${deckId}`);
+        const { data } = await api.get<Card[]>(
+          `/card/${deckId}?search=${searchInputParam || ""}`
+        );
         setCards(data);
       } catch (error) {
         console.error(error);
@@ -39,7 +45,7 @@ export const CardList = ({ infoDeck }: CardListProps) => {
       }
     }
     fetchCards();
-  }, [infoDeck]);
+  }, [infoDeck, searchInputParam]);
 
   if (cards === null)
     return (
@@ -47,6 +53,8 @@ export const CardList = ({ infoDeck }: CardListProps) => {
         <Loading />
       </div>
     );
+  if (searchInputParam && cards?.length === 0)
+    return <h3 className="fade-right text-xl">Card não encontrado</h3>;
   if (cards?.length === 0)
     return (
       <h3 className="fade-right text-xl">
@@ -55,6 +63,7 @@ export const CardList = ({ infoDeck }: CardListProps) => {
     );
   return (
     <div className="fade-right overflow-auto">
+      <SearchFilter />
       <table className="w-full">
         <thead>
           <tr className="bg-black text-white rounded-xl">

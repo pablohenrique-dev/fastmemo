@@ -34,12 +34,8 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
   async function login(email: string, password: string) {
     const response = await USER_LOGIN(email, password);
-    if (response.status === "error") {
+    if (response.status === "error" || typeof response === "string") {
       setError(response.message);
-      setLogged(false);
-      setUser(null);
-    } else if (typeof response === "string") {
-      setError(response);
       setLogged(false);
       setUser(null);
     } else if (response.data.user && response.data.token) {
@@ -53,12 +49,8 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
   async function registerUser(name: string, email: string, password: string) {
     const response = await USER_REGISTER(name, email, password);
-    if (response.status === "error") {
+    if (response.status === "error" || typeof response === "string") {
       setError(response.message);
-      setLogged(false);
-      setUser(null);
-    } else if (typeof response === "string") {
-      setError(response);
       setLogged(false);
       setUser(null);
     } else if (response.status === 201) {
@@ -78,14 +70,11 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
       const storedToken = localStorage.getItem(token);
       if (storedToken) {
         const response = await VALIDATE_TOKEN(storedToken);
-        if (response.status === "error") {
+        if (response.status === "error" || typeof response === "string") {
           setError("Faça login novamente!");
           setLogged(false);
           setUser(null);
-        } else if (typeof response === "string") {
-          setError(response);
-          setLogged(false);
-          setUser(null);
+          localStorage.removeItem(token);
         } else if (response.status === 200) {
           setUser(response.data);
           setLogged(true);

@@ -98,7 +98,7 @@ export const Account = () => {
         description="Veja as informações de sua conta."
       />
       <div className="flex flex-col fade-right">
-        <div className="flex items-end justify-between mb-6">
+        <div className="flex flex-col items-start gap-4 md:items-end md:justify-between mb-6">
           <h2 className="text-[24px] md:text-[32px] font-semibold text-black">
             Minha conta
           </h2>
@@ -155,7 +155,7 @@ export const Account = () => {
 
             <label
               htmlFor="photo"
-              className="relative w-[200px] flex flex-col justify-center items-center rounded-full border border-dashed border-black aspect-square cursor-pointer"
+              className="relative w-full md:w-[200px] flex flex-col justify-center items-center rounded-full border border-dashed border-black aspect-square cursor-pointer"
             >
               {img.preview ? (
                 <img
@@ -164,7 +164,7 @@ export const Account = () => {
                 />
               ) : (
                 <>
-                  <ImageSquare size={32} className="mb-1" />
+                  <ImageSquare size={32} className="mb-1 md:" />
                   Escolha uma foto
                 </>
               )}

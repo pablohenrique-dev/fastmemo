@@ -38,7 +38,7 @@ export const Register = () => {
   }
   if (logged) return <Navigate to="/" />;
   return (
-    <section className="flex flex-col justify-center items-center max-w-screen md:w-screen h-screen mt-[-64px]">
+    <section className="flex flex-col justify-center items-center max-w-screen md:w-screen h-screen mt-[-64px]  md:mt-0">
       <Head
         title="Criar conta"
         description="Crie sua conta no sistema de repetição espaçada fastmemo"

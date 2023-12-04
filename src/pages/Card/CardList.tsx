@@ -58,7 +58,7 @@ export const CardList = ({ infoDeck }: CardListProps) => {
       <table className="w-full">
         <thead>
           <tr className="bg-black text-white rounded-xl">
-            <th className="rounded-tl p-2 text-left border-r-2 border-white">
+            <th className="rounded-tl p-2 md:w-[50px] text-left border-r-2 border-white">
               <ArrowClockwise size={22} className="mx-auto" />
             </th>
             <th className="whitespace-nowrap p-2 pl-4 text-left border-r-2 border-white max-w-[200px]">

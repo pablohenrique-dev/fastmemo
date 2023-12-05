@@ -5,6 +5,7 @@ import {
   ChartPie,
   SignOut,
   UserCircleGear,
+  Lightbulb,
 } from "@phosphor-icons/react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { NavLinkComponent } from "../NavLink/Index";
@@ -50,13 +51,22 @@ export const Navbar = ({ isOpen, setIsOpen }: NavBarProps) => {
             Início
           </button>
         </NavLinkComponent>
-        <NavLinkComponent to="/estatisticas?q=asdasd">
+        <NavLinkComponent to="/estatisticas">
           <button
             className="flex gap-2 items-center w-full"
             onClick={() => setIsOpen(false)}
           >
             <ChartPie size={24} />
             Estatísticas
+          </button>
+        </NavLinkComponent>
+        <NavLinkComponent to="/sobre">
+          <button
+            className="flex gap-2 items-center w-full"
+            onClick={() => setIsOpen(false)}
+          >
+            <Lightbulb size={24} />
+            Sobre
           </button>
         </NavLinkComponent>
       </div>

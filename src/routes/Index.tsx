@@ -13,6 +13,7 @@ import { ProtectedRoute } from "../utils/ProtectedRoute";
 import { Navbar } from "../components/Navbar/Index";
 import { SplashScreen } from "../components/SplashScreen/Index";
 import { Header } from "../components/Header/Index";
+import { About } from "../pages/About/Index";
 
 const myRoutes = [
   { element: Home, path: "/" },
@@ -21,6 +22,7 @@ const myRoutes = [
   { element: Deck, path: "/cards/*" },
   { element: AddDeck, path: "/adicionar-deck" },
   { element: UpdateDeck, path: "/atualizar-deck" },
+  { element: About, path: "/sobre" },
 ];
 
 export const AppRoutes = () => {

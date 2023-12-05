@@ -24,7 +24,7 @@ export const Deck = () => {
   }, []);
 
   return (
-    <div className="p-6 fade-right h-screen">
+    <div className="p-6 fade-right">
       <Head
         title={decodeSpecialString(titleDeck!)}
         description="Faça sua revisão diária de cards."

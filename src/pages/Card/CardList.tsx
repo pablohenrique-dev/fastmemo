@@ -62,9 +62,9 @@ export const CardList = ({ infoDeck }: CardListProps) => {
       </h3>
     );
   return (
-    <div className="fade-right overflow-auto">
+    <div className="fade-right overflow-x-auto">
       <SearchFilter />
-      <table className="w-full">
+      <table className="w-full mb-4">
         <thead>
           <tr className="bg-black text-white rounded-xl">
             <th className="rounded-tl p-2 md:w-[50px] text-left border-r-2 border-white">

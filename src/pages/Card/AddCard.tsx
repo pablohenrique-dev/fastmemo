@@ -29,6 +29,7 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormCreateCardData>({
     resolver: zodResolver(FormCreateCardSchema),
   });
@@ -51,6 +52,10 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
       try {
         await api.post("/card", cardObj);
         setMessageSuccess("Card cadastrado com sucesso!");
+        reset({
+          front: "",
+          back: "",
+        });
       } catch (error) {
         setError("Não foi possível cadastrar o card!");
       }

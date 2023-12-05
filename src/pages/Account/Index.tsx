@@ -16,14 +16,14 @@ interface ImageState {
 }
 
 const FormUserAccountSchema = z.object({
-  name: z.string().nonempty("O campo precisa ser preenchido!"),
+  name: z.string().min(1, "O campo precisa ser preenchido!"),
   email: z
     .string()
-    .nonempty("O campo precisa ser preenchido!")
+    .min(1, "O campo precisa ser preenchido!")
     .email("O formato do e-mail está incorreto!"),
   old_password: z
     .string()
-    .nonempty("O campo senha precisa ser preenchido para a atualização!")
+    .min(1, "O campo senha precisa ser preenchido para a atualização!")
     .min(5, "o campo precisa ter no mínimo 5 caracteres!"),
   password: z.string(),
 });

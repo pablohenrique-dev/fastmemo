@@ -10,8 +10,8 @@ import { Card } from "../../@types/global";
 import { AlertComponent } from "../../components/Error/Index";
 
 const FormUpdateInfoCardSchema = z.object({
-  front: z.string().nonempty("O campo precisa ser preenchido!"),
-  back: z.string().nonempty("O campo precisa ser preenchido!"),
+  front: z.string().min(1, "O campo precisa ser preenchido!"),
+  back: z.string().min(1, "O campo precisa ser preenchido!"),
 });
 
 type FormUpdateInfoCardData = z.infer<typeof FormUpdateInfoCardSchema>;

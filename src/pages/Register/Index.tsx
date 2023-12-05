@@ -9,15 +9,15 @@ import { AlertComponent } from "../../components/Error/Index";
 import { Head } from "../../utils/Head";
 
 const FormRegisterUserSchema = z.object({
-  name: z.string().nonempty("O campo precisa ser preenchido!"),
+  name: z.string().min(1, "O campo precisa ser preenchido!"),
   email: z
     .string()
-    .nonempty("O campo precisa ser preenchido!")
+    .min(1, "O campo precisa ser preenchido!")
     .email("O formato do e-mail está incorreto!"),
   password: z
     .string()
     .min(5, "o campo precisa ter no mínimo 5 caracteres!")
-    .nonempty("O campo precisa ser preenchido!"),
+    .min(1, "O campo precisa ser preenchido!"),
 });
 
 type FormRegisterUserData = z.infer<typeof FormRegisterUserSchema>;

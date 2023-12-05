@@ -11,12 +11,12 @@ import { Head } from "../../utils/Head";
 const FormUserLoginSchema = z.object({
   email: z
     .string()
-    .nonempty("O campo precisa ser preenchido!")
+    .min(1, "O campo precisa ser preenchido!")
     .email("O formato do e-mail está incorreto!"),
   password: z
     .string()
     .min(5, "o campo precisa ter no mínimo 5 caracteres!")
-    .nonempty("O campo precisa ser preenchido!"),
+    .min(1, "O campo precisa ser preenchido!"),
 });
 
 type FormUserLoginData = z.infer<typeof FormUserLoginSchema>;

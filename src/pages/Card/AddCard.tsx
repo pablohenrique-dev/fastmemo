@@ -11,8 +11,8 @@ import { formatDate } from "../../utils/handleDate";
 import { Loading } from "../../components/Loading/Index";
 
 const FormCreateCardSchema = z.object({
-  front: z.string().nonempty("O campo precisa ser preenchido!"),
-  back: z.string().nonempty("O campo precisa ser preenchido!"),
+  front: z.string().min(1, "O campo precisa ser preenchido!"),
+  back: z.string().min(1, "O campo precisa ser preenchido!"),
 });
 
 type FormCreateCardData = z.infer<typeof FormCreateCardSchema>;

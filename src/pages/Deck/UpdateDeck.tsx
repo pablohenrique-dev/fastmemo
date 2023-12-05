@@ -13,7 +13,7 @@ import { isAxiosError } from "axios";
 const FormUpdateDeckSchema = z.object({
   name: z
     .string()
-    .nonempty("O campo precisa ser preenchido!")
+    .min(1, "O campo precisa ser preenchido!")
     .max(25, "O campo deve ter no máximo 25 caracteres!"),
 });
 

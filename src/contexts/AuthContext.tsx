@@ -70,7 +70,11 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
       const storedToken = localStorage.getItem(token);
       if (storedToken) {
         const response = await VALIDATE_TOKEN(storedToken);
-        if (response.status === "error" || typeof response === "string") {
+        if (
+          response.status === "error" ||
+          response.data === null ||
+          typeof response === "string"
+        ) {
           setError("Faça login novamente!");
           setLogged(false);
           setUser(null);

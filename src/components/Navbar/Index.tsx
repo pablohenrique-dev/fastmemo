@@ -82,7 +82,7 @@ export const Navbar = ({ isOpen, setIsOpen }: NavBarProps) => {
         </NavLinkComponent>
         <button
           onClick={logoutUser}
-          className="nav-link fade-right border border-black md:border-none"
+          className="nav-link fade-right border border-black md:border-none px-4"
         >
           <SignOut size={24} />
           Sair

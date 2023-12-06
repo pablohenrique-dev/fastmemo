@@ -29,7 +29,7 @@ export const Deck = () => {
         title={decodeSpecialString(titleDeck!)}
         description="Faça sua revisão diária de cards."
       />
-      <h2 className="text-2xl md:text-[32px] font-semibold text-black mb-3">
+      <h2 className="text-2xl md:text-[32px] font-semibold text-black mb-6">
         Baralho{titleDeck && ": " + decodeSpecialString(titleDeck)}
       </h2>
       <nav className="flex gap-2 mb-6 pb-4 border-b border-slate-default overflow-auto">

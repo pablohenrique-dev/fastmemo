@@ -54,7 +54,12 @@ export const CardList = ({ infoDeck }: CardListProps) => {
       </div>
     );
   if (searchInputParam && cards?.length === 0)
-    return <h3 className="fade-right text-xl">Card não encontrado</h3>;
+    return (
+      <div>
+        <SearchFilter />
+        <h3 className="fade-right text-xl">Card não encontrado... 😕</h3>
+      </div>
+    );
   if (cards?.length === 0)
     return (
       <h3 className="fade-right text-xl">

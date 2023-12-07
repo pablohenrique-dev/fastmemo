@@ -6,6 +6,16 @@ export function formatDate(dateTime: string) {
   return `${day}/${month}/${year}`;
 }
 
+export function formatDateToday() {
+  const dateToday = new Date();
+
+  const year = dateToday.getFullYear();
+  const month = String(dateToday.getMonth() + 1);
+  const day = String(dateToday.getDate());
+
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+}
+
 export function calculateNextReview(nextReviewController: number): string {
   const dateNowInMilliseconds = new Date().getTime();
   const millisecondsInOneDay = 86400000;

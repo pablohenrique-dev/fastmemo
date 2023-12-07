@@ -22,7 +22,7 @@ export const ReviewCard = ({ infoDeck }: ReviewCardProps) => {
     dateNextReview: string
   ) {
     try {
-      await api.put(`/card/${indexCard}`, {
+      await api.put(`/review-card-counter/${indexCard}`, {
         next_review: dateNextReview,
       });
     } catch (error) {

@@ -26,7 +26,11 @@ export const useStatistics = (
       ? cardsRevisedArr
           .filter((cardsRevisedToday) => {
             return (
-              cardsRevisedToday.created_at.split("T")[0] === formatDateToday()
+              new Date(cardsRevisedToday.created_at)
+                .toLocaleString("pt-BR", {
+                  timeZone: "America/Sao_Paulo",
+                })
+                .split(", ")[0] === formatDateToday()
             );
           })
           .reduce((acc, value) => {

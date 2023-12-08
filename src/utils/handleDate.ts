@@ -13,7 +13,7 @@ export function formatDateToday() {
   const month = String(dateToday.getMonth() + 1);
   const day = String(dateToday.getDate());
 
-  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${year}`;
 }
 
 export function calculateNextReview(nextReviewController: number): string {

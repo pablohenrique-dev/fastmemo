@@ -9,8 +9,8 @@ import { StatsHeader } from "./components/StatsHeader";
 export interface CardsRevisedArrResponse {
   id: number;
   count: number;
-  created_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
   cardId: number;
   userId: number;
 }

@@ -82,7 +82,7 @@ export const ReviewCard = ({ infoDeck }: ReviewCardProps) => {
   ) {
     return (
       <h3 className="fade-right text-xl">
-        Parabéns, você fez todas as revisões de hoje! 🎉
+        Parabéns, você concluiu todas as revisões previstas para hoje! 🎉
       </h3>
     );
   }
@@ -111,23 +111,7 @@ export const ReviewCard = ({ infoDeck }: ReviewCardProps) => {
                     </>
                   )}
                 </div>
-                {!display && (
-                  <div className="flex flex-col gap-4 md:gap-6 md:flex-row">
-                    <button
-                      disabled={currentCardIndex === 0}
-                      onClick={handlePreviousCard}
-                      className="whitespace-nowrap border border-slate-default rounded px-4 py-3 flex items-center justify-center gap-4 w-full  hover:bg-black hover:text-white hover:border-black transition-all disabled:cursor-not-allowed disabled:text-neutral-600 disabled:hover:bg-white"
-                      title="Voltar para o card anterior"
-                    >
-                      <ArrowLeft size={24} />
-                      Card anterior
-                    </button>
-                    <Button onClick={() => setDisplay(true)}>
-                      Ver resposta
-                    </Button>
-                  </div>
-                )}
-                {display && (
+                {display ? (
                   <div className="fade-right grid grid-cols-4 gap-2 md:gap-4">
                     <Button onClick={() => handleNextCard(card.id, 0)}>
                       Resetar
@@ -140,6 +124,21 @@ export const ReviewCard = ({ infoDeck }: ReviewCardProps) => {
                     </Button>
                     <Button onClick={() => handleNextCard(card.id, 5)}>
                       Fácil
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-4 md:gap-6 md:flex-row">
+                    <button
+                      disabled={currentCardIndex === 0}
+                      onClick={handlePreviousCard}
+                      className="whitespace-nowrap border border-slate-default rounded px-4 py-3 flex items-center justify-center gap-4 w-full  hover:bg-black hover:text-white hover:border-black transition-all disabled:cursor-not-allowed disabled:text-neutral-600 disabled:hover:bg-white"
+                      title="Voltar para o card anterior"
+                    >
+                      <ArrowLeft size={24} />
+                      Card anterior
+                    </button>
+                    <Button onClick={() => setDisplay(true)}>
+                      Ver resposta
                     </Button>
                   </div>
                 )}

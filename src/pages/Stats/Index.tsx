@@ -51,7 +51,13 @@ export const Stats = () => {
             reviewsToday={reviewsToday}
           />
 
-          {reviewsPerDay && <Chart data={reviewsPerDay} />}
+          {reviewsPerDay ? (
+            <Chart data={reviewsPerDay} />
+          ) : (
+            <h3 className="fade-right text-xl">
+              Não houve revisões no periodo selecionado! 😥
+            </h3>
+          )}
         </>
       )}
     </section>

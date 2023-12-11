@@ -16,30 +16,25 @@ export const useStatistics = (
       return { totalReviews: 0, reviewsToday: 0, reviewsPerDay: null };
     }
 
-    const calculateTotalReviews = cardsRevisedArr
-      ? cardsRevisedArr.reduce((acc, value) => {
-          return acc + value.count;
-        }, 0)
-      : 0;
+    const calculateTotalReviews = cardsRevisedArr.reduce((acc, value) => {
+      return acc + value.count;
+    }, 0);
 
     const calculateReviewsToday = cardsRevisedArr
-      ? cardsRevisedArr
-          .filter((cardsRevisedToday) => {
-            return (
-              new Date(cardsRevisedToday.created_at)
-                .toLocaleString("pt-BR", {
-                  timeZone: "America/Sao_Paulo",
-                })
-                .split(", ")[0] === formatDateToday()
-            );
-          })
-          .reduce((acc, value) => {
-            return acc + value.count;
-          }, 0)
-      : 0;
+      .filter((cardsRevisedToday) => {
+        return (
+          new Date(cardsRevisedToday.created_at)
+            .toLocaleString("pt-BR", {
+              timeZone: "America/Sao_Paulo",
+            })
+            .split(", ")[0] === formatDateToday()
+        );
+      })
+      .reduce((acc, value) => {
+        return acc + value.count;
+      }, 0);
 
-    const groupedByDate =
-      cardsRevisedArr && groupReviewsByDate(cardsRevisedArr);
+    const groupedByDate = groupReviewsByDate(cardsRevisedArr);
 
     return {
       totalReviews: calculateTotalReviews,

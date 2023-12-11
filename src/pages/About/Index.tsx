@@ -20,6 +20,11 @@ export const About = () => {
               Entendendo a curva do esquecimento
             </a>
           </li>
+          <li>
+            <a href="#dicas">
+              Como usar um sistema de repetição espaçada de forma otimizada?
+            </a>
+          </li>
         </ul>
       </aside>
       <div>
@@ -36,7 +41,7 @@ export const About = () => {
             className="underline underline-offset-4 text-blue-500 leading-normal"
             href="https://pt.wikipedia.org/wiki/Repeti%C3%A7%C3%A3o_espa%C3%A7ada"
           >
-            repetição espaçada
+            repetição espaçada (SRS)
           </a>{" "}
           que auxilia no processo de memorização e aprendizado de forma
           otimizada, utilizando algoritmos para determinar o momento ideal para
@@ -48,6 +53,16 @@ export const About = () => {
         </p>
         <p className="mb-4">Veja um exemplo do funcionamento:</p>
         <ReviewExample />
+        <p className="mb-6">
+          Note que após clicar em <strong>ver resposta</strong>, além da
+          resposta será mostrado 4 botões sendo eles: <strong>Resetar</strong>,
+          <strong> Difícil</strong>, <strong> Bom</strong> e{" "}
+          <strong> Fácil</strong>. Cada um deles determinará um intervalo
+          diferente para a próxima revisão da carta. Vale lembrar que o botão
+          <strong> Resetar</strong> será responsável por zerar o intervalo de
+          revisão (tempo que determinará a data da próxima revisão), dessa
+          forma, a carta será tratada como recém adicionada.
+        </p>
         <h2
           id="sobre-repeticao-espacada"
           className="text-2xl font-semibold text-black mb-3"
@@ -109,11 +124,60 @@ export const About = () => {
           alt="imagem sobre a curva do esquecimento"
           className="mb-4"
         />
-        <p className="mb-4">
+        <p className="mb-6">
           A ideia então é que ao longo das revisões a curva do esquecimento
           fique mais "plana", aumentando a probabilidade de se lembrar de
           determinado assunto.
         </p>
+        <h2 id="dicas" className="text-2xl font-semibold text-black mb-3">
+          Como usar um sistema de repetição espaçada (SRS) de forma otimizada?
+        </h2>
+        <p>
+          Ao iniciar o uso de apps de <strong>SRS</strong> como o fastmemo você
+          pode pensar:
+        </p>
+        <blockquote className="italic m-4">
+          "Já que um SRS otimiza a memorização, então vou apenas jogar o máximo
+          de informações dentro de um card para aprender essa informação o
+          quanto antes."
+        </blockquote>
+        <p>
+          Infelizmente, essa não é a melhor abordagem, pois quanto mais
+          informações um card possuir, mais difícil será a memorização do mesmo.
+          Então, aqui estão algumas dicas valiosas:
+        </p>
+        <ol className="list-decimal list-inside my-4 flex flex-col gap-3">
+          <li>
+            <strong>Quanto mais simples melhor:</strong> Mantenha as informações
+            dentro de cada card o mais simples possível;
+          </li>
+          <li>
+            <strong>Informações únicas:</strong> Sempre que possível, adicione
+            apenas informações de um único tópico. Por exemplo, caso esteja
+            aprendendo um novo idioma, em cada card cadastre frases que possuam
+            apenas uma única palavra desconhecida;
+          </li>
+          <li>
+            <strong>Utilize uma linguagem que faça sentido para você:</strong>{" "}
+            Adeque as informações dentro de cada card a uma linguagem que você
+            consiga entender, evitando sempre que possível o uso excessivo de
+            termos técnicos;
+          </li>
+          <li>
+            <strong>Utilize informações pessoais a seu favor:</strong> O uso de{" "}
+            <a
+              target="_blank"
+              className="underline underline-offset-4 text-blue-500 leading-normal"
+              href="https://pt.wikipedia.org/wiki/Mnem%C3%B3nica"
+            >
+              mnemónicos
+            </a>{" "}
+            juntamente com informações relacionadas ao seu dia a dia também é
+            muito útil. Por exemplo, às vezes datas, localizações e nomes que
+            fazem parte da sua vida podem ser utilizados como palavras-chave
+            para se conectar com o que você está aprendendo;
+          </li>
+        </ol>
       </div>
     </section>
   );

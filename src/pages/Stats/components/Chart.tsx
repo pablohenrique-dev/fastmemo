@@ -18,7 +18,7 @@ export const Chart = ({ data }: { data: ReviewsPerDay[] }) => {
       </h2>
       <ResponsiveContainer width="100%" height={420}>
         <BarChart
-          className="ml-[-44px]"
+          className="ml-[-24px] md:ml-[-44px]"
           width={500}
           height={300}
           data={data}

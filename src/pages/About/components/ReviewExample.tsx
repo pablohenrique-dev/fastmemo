@@ -38,7 +38,7 @@ export const ReviewExample = () => {
 
   return (
     <div
-      className={`border transition-all rounded-md p-6 mb-8 ${
+      className={`border transition-all rounded-md p-6 mb-6 ${
         indexCardToDisplay >= cardsArrExample.length
           ? "border-green-600 border-2"
           : "border-slate-default"

@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
-import { formatDate, simplifyReturnedDate } from "../../utils/handleDate";
+import {
+  calculateDifferenceBetweenDays,
+  formatDate,
+} from "../../utils/handleDate";
 import { ArrowClockwise, Trash } from "@phosphor-icons/react";
 import { decodeSpecialString, sanitizeName } from "../../utils/handleString";
 
@@ -29,8 +32,7 @@ export const DeckComponent = ({
 
   return (
     <div className="relative flex flex-col rounded-md overflow-hidden border border-slate-default  hover:border-black transition">
-      {simplifyReturnedDate(new Date().toISOString()) -
-        simplifyReturnedDate(created_at) <=
+      {calculateDifferenceBetweenDays(new Date().toISOString(), created_at) <=
         5 && (
         <span className="text-black bg-white px-2 py-[2px] font-semibold text-sm absolute top-4 right-4 rounded-sm">
           Novo

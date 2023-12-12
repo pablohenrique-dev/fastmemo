@@ -11,37 +11,46 @@ export interface ReviewsPerDay {
 export const useStatistics = (
   cardsRevisedArr: CardsRevisedArrResponse[] | null
 ) => {
-  const { totalReviews, reviewsToday, reviewsPerDay } = React.useMemo(() => {
-    if (!cardsRevisedArr || cardsRevisedArr.length === 0) {
-      return { totalReviews: 0, reviewsToday: 0, reviewsPerDay: null };
-    }
+  const { totalReviews, reviewsToday, reviewsPerDay, averageDailyReview } =
+    React.useMemo(() => {
+      if (!cardsRevisedArr || cardsRevisedArr.length === 0) {
+        return {
+          totalReviews: 0,
+          reviewsToday: 0,
+          reviewsPerDay: null,
+          averageDailyReview: 0,
+        };
+      }
 
-    const calculateTotalReviews = cardsRevisedArr.reduce((acc, value) => {
-      return acc + value.count;
-    }, 0);
-
-    const calculateReviewsToday = cardsRevisedArr
-      .filter((cardsRevisedToday) => {
-        return (
-          new Date(cardsRevisedToday.created_at)
-            .toLocaleString("pt-BR", {
-              timeZone: "America/Sao_Paulo",
-            })
-            .split(", ")[0] === formatDateToday()
-        );
-      })
-      .reduce((acc, value) => {
+      const calculateTotalReviews = cardsRevisedArr.reduce((acc, value) => {
         return acc + value.count;
       }, 0);
 
-    const groupedByDate = groupReviewsByDate(cardsRevisedArr);
+      const calculateReviewsToday = cardsRevisedArr
+        .filter((cardsRevisedToday) => {
+          return (
+            new Date(cardsRevisedToday.created_at)
+              .toLocaleString("pt-BR", {
+                timeZone: "America/Sao_Paulo",
+              })
+              .split(", ")[0] === formatDateToday()
+          );
+        })
+        .reduce((acc, value) => {
+          return acc + value.count;
+        }, 0);
 
-    return {
-      totalReviews: calculateTotalReviews,
-      reviewsToday: calculateReviewsToday,
-      reviewsPerDay: groupedByDate,
-    };
-  }, [cardsRevisedArr]);
+      const groupedByDate = groupReviewsByDate(cardsRevisedArr);
 
-  return { totalReviews, reviewsToday, reviewsPerDay };
+      const averageDailyReview = calculateTotalReviews / groupedByDate.length;
+
+      return {
+        totalReviews: calculateTotalReviews,
+        reviewsToday: calculateReviewsToday,
+        reviewsPerDay: groupedByDate,
+        averageDailyReview,
+      };
+    }, [cardsRevisedArr]);
+
+  return { totalReviews, reviewsToday, reviewsPerDay, averageDailyReview };
 };

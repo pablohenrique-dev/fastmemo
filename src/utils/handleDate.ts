@@ -23,21 +23,26 @@ export function calculateNextReview(nextReviewController: number): string {
   const additionalTime = millisecondsInOneDay * nextReviewController;
   const nextReviewInMilliseconds = dateNowInMilliseconds + additionalTime;
 
-  const dateNextReview = new Date(nextReviewInMilliseconds)
+  const dateNextReview = new Date(nextReviewInMilliseconds);
 
   dateNextReview.setHours(0, 0, 0, 0);
 
   return new Date(dateNextReview).toISOString();
 }
 
-/**
- * Recebe como argumento um dateTime no padrão ISO-8601 e retorna um número com o formato DDMMYYYY
- * @param {dateTime} dateTime - Ex: "2023-09-23T17:02:54.623Z"
- * @returns {number} - Ex: 23092023
- */
-export function simplifyReturnedDate(dateTime: string): number {
-  const date = dateTime.split("T")[0];
-  const [year, month, day] = date.split("-");
+export function calculateDifferenceBetweenDays(
+  firstDate: string,
+  secondDate: string
+) {
+  const firstDateWithoutTime = firstDate.split("T")[0];
+  const secondDateWithoutTime = secondDate.split("T")[0];
 
-  return Number(year + month + day);
+  const firstDateInMilliseconds = new Date(firstDateWithoutTime).getTime();
+  const secondDateInMilliseconds = new Date(secondDateWithoutTime).getTime();
+
+  const differenceInDays =
+    (firstDateInMilliseconds - secondDateInMilliseconds) /
+    (24 * 60 * 60 * 1000);
+
+  return Math.abs(differenceInDays);
 }

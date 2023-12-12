@@ -20,16 +20,20 @@ export const Stats = () => {
     CardsRevisedArrResponse[] | null
   >(null);
   const [isLoading, setIsLoading] = React.useState(true);
-  const { totalReviews, reviewsToday, reviewsPerDay } =
+  const [error, setError] = React.useState(false);
+  const { totalReviews, reviewsToday, reviewsPerDay, averageDailyReview } =
     useStatistics(cardsRevisedArr);
 
   React.useEffect(() => {
     async function fetchCardsRevisedAmount() {
       try {
-        const { data } = await api.get("/review-card-counter");
+        const { data } = await api.get<CardsRevisedArrResponse[]>(
+          "/review-card-counter"
+        );
         setCardsRevisedArr(data);
       } catch (error) {
         console.error(error);
+        setError(true);
         setCardsRevisedArr(null);
       } finally {
         setIsLoading(false);
@@ -39,6 +43,18 @@ export const Stats = () => {
     fetchCardsRevisedAmount();
   }, []);
 
+  if (error)
+    return (
+      <h3 className="fade-right text-xl p-6">
+        Ops...Parece que ocorreu um erro! Por favor, atualize a página!
+      </h3>
+    );
+  if (!reviewsPerDay)
+    return (
+      <h3 className="fade-right text-xl p-6">
+        Você ainda não fez nenhuma revisão... 😥
+      </h3>
+    );
   return (
     <section className="p-6 fade-right">
       <Head title="Estatísticas" description="Veja suas últimas estatistica!" />
@@ -49,15 +65,9 @@ export const Stats = () => {
           <StatsHeader
             totalReviews={totalReviews}
             reviewsToday={reviewsToday}
+            averageDailyReview={averageDailyReview}
           />
-
-          {reviewsPerDay ? (
-            <Chart data={reviewsPerDay} />
-          ) : (
-            <h3 className="fade-right text-xl">
-              Não houve revisões no periodo selecionado! 😥
-            </h3>
-          )}
+          <Chart data={reviewsPerDay} />
         </>
       )}
     </section>

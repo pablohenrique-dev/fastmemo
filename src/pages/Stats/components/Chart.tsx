@@ -16,7 +16,7 @@ export const Chart = ({ data }: { data: ReviewsPerDay[] }) => {
       <h2 className="text-[24px] md:text-[32px] font-semibold text-black mb-8">
         Revisões por dia
       </h2>
-      <ResponsiveContainer width="100%" height={420}>
+      <ResponsiveContainer width="100%" height={380}>
         <BarChart
           className="ml-[-24px] md:ml-[-44px]"
           width={500}

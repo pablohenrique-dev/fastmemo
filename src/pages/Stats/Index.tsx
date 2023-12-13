@@ -19,16 +19,19 @@ export const Stats = () => {
   const [cardsRevisedArr, setCardsRevisedArr] = React.useState<
     CardsRevisedArrResponse[] | null
   >(null);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [initialDate, setInitialDate] = React.useState("");
+  const [finalDate, setFinalDate] = React.useState("");
   const { totalReviews, reviewsToday, reviewsPerDay, averageDailyReview } =
     useStatistics(cardsRevisedArr);
 
   React.useEffect(() => {
     async function fetchCardsRevisedAmount() {
       try {
+        setIsLoading(true);
         const { data } = await api.get<CardsRevisedArrResponse[]>(
-          "/review-card-counter"
+          `/review-card-counter?initialDate=${initialDate}&finalDate=${finalDate}`
         );
         setCardsRevisedArr(data);
       } catch (error) {
@@ -41,7 +44,7 @@ export const Stats = () => {
     }
 
     fetchCardsRevisedAmount();
-  }, []);
+  }, [initialDate, finalDate]);
 
   if (error)
     return (
@@ -55,21 +58,20 @@ export const Stats = () => {
         Você ainda não fez nenhuma revisão... 😥
       </h3>
     );
+  if (isLoading) return <Loading />;
   return (
     <section className="p-6 fade-right">
       <Head title="Estatísticas" description="Veja suas últimas estatistica!" />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <StatsHeader
-            totalReviews={totalReviews}
-            reviewsToday={reviewsToday}
-            averageDailyReview={averageDailyReview}
-          />
-          <Chart data={reviewsPerDay} />
-        </>
-      )}
+      <StatsHeader
+        totalReviews={totalReviews}
+        reviewsToday={reviewsToday}
+        averageDailyReview={averageDailyReview}
+        initialDate={initialDate}
+        setInitialDate={setInitialDate}
+        finalDate={finalDate}
+        setFinalDate={setFinalDate}
+      />
+      <Chart data={reviewsPerDay} />
     </section>
   );
 };

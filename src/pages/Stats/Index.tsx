@@ -52,7 +52,7 @@ export const Stats = () => {
         Ops...Parece que ocorreu um erro! Por favor, atualize a página!
       </h3>
     );
-  if (!reviewsPerDay)
+  if (!reviewsPerDay && !initialDate && !finalDate)
     return (
       <h3 className="fade-right text-xl p-6">
         Você ainda não fez nenhuma revisão... 😥
@@ -71,7 +71,13 @@ export const Stats = () => {
         finalDate={finalDate}
         setFinalDate={setFinalDate}
       />
-      <Chart data={reviewsPerDay} />
+      {reviewsPerDay ? (
+        <Chart data={reviewsPerDay} />
+      ) : (
+        <h3 className="fade-right text-xl">
+          Você ainda não fez nenhuma revisão no período selecionado... 😥
+        </h3>
+      )}
     </section>
   );
 };

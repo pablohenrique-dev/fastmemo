@@ -19,10 +19,31 @@ export const StatsHeader = ({
   setInitialDate,
   setFinalDate,
 }: StatsHeaderProps) => {
+  const [isTooltipOpen, setIsTooltipOpen] = React.useState(false);
+
+  function handleOpenTooltip(e: React.MouseEvent) {
+    e.preventDefault();
+    setIsTooltipOpen((tooltipState) => !tooltipState);
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 text-black">
       <form className="w-full border border-slate-default rounded-md flex flex-col gap-6 p-4 sm:p-6">
-        <h3 className="text-3xl font-semibold">Período</h3>
+        <div className="w-fit flex gap-4 items-center relative">
+          <h3 className="text-3xl font-semibold">Período</h3>
+          <button
+            title="tooltip"
+            className="px-2 h-[20px] flex items-center justify-center aspect-square rounded-full text-white bg-black opacity-75"
+            onClick={handleOpenTooltip}
+          >
+            <span>?</span>
+          </button>
+          {isTooltipOpen && (
+            <p className="p-2 text-sm bg-black text-white rounded opacity-75 w-[140px] absolute right-[-148px] md:right-[-156px] top-0">
+              A data inicial precisa ser menor que a data final!
+            </p>
+          )}
+        </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2 w-full">
             <label

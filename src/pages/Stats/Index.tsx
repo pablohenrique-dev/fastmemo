@@ -69,6 +69,7 @@ export const Stats = () => {
         setInitialDate={setInitialDate}
         finalDate={finalDate}
         setFinalDate={setFinalDate}
+        reviewsPerDay={reviewsPerDay}
       />
       {reviewsPerDay ? (
         <Chart data={reviewsPerDay} />

@@ -1,7 +1,9 @@
 import React from "react";
+import { ReviewsPerDay } from "../../../hooks/useStatistics";
 
 interface StatsHeaderProps {
   totalReviews: number;
+  reviewsPerDay: ReviewsPerDay[] | null;
   reviewsToday: number;
   averageDailyReview: number;
   initialDate: string;
@@ -12,6 +14,7 @@ interface StatsHeaderProps {
 
 export const StatsHeader = ({
   totalReviews,
+  reviewsPerDay,
   reviewsToday,
   averageDailyReview,
   initialDate,
@@ -81,15 +84,19 @@ export const StatsHeader = ({
       </form>
       <div className="w-full border border-slate-default flex flex-col gap-6 rounded-md p-4 sm:p-6">
         <h3 className="text-3xl font-semibold">Resumo</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <p className="text-xl opacity-75">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <p className="text-lg sm:text-xl opacity-75">
             <strong>Total:</strong> {totalReviews} revisões
           </p>
-          <p className="text-xl opacity-75">
+          <p className="text-lg sm:text-xl opacity-75">
             <strong>Hoje:</strong> {reviewsToday} revisões
           </p>
-          <p className="text-xl opacity-75">
+          <p className="text-lg sm:text-xl opacity-75">
             <strong>Média:</strong> {averageDailyReview.toFixed(2)} revisões
+          </p>
+          <p className="text-lg sm:text-xl opacity-75">
+            <strong>Dias revisados:</strong>{" "}
+            {reviewsPerDay ? reviewsPerDay.length : 0}
           </p>
         </div>
       </div>

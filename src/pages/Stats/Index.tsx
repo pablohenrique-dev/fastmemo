@@ -42,10 +42,10 @@ export const Stats = () => {
         setIsLoading(false);
       }
     }
-
     fetchCardsRevisedAmount();
   }, [initialDate, finalDate]);
 
+  if (isLoading) return <Loading />;
   if (error)
     return (
       <h3 className="fade-right text-xl p-6">
@@ -58,7 +58,6 @@ export const Stats = () => {
         Você ainda não fez nenhuma revisão... 😥
       </h3>
     );
-  if (isLoading) return <Loading />;
   return (
     <section className="p-6 fade-right">
       <Head title="Estatísticas" description="Veja suas últimas estatistica!" />
@@ -75,7 +74,7 @@ export const Stats = () => {
         <Chart data={reviewsPerDay} />
       ) : (
         <h3 className="fade-right text-xl">
-          Você ainda não fez nenhuma revisão no período selecionado... 😥
+          Você não fez nenhuma revisão no período selecionado... 😥
         </h3>
       )}
     </section>

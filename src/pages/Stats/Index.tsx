@@ -3,7 +3,7 @@ import { Head } from "../../utils/Head";
 import { api } from "../../services/api";
 import { Loading } from "../../components/Loading/Index";
 import { useStatistics } from "../../hooks/useStatistics";
-import { Chart } from "./components/Chart";
+const Chart = React.lazy(() => import("./components/Chart"));
 import { StatsHeader } from "./components/StatsHeader";
 
 export interface CardsRevisedArrResponse {
@@ -72,7 +72,9 @@ export const Stats = () => {
         reviewsPerDay={reviewsPerDay}
       />
       {reviewsPerDay ? (
-        <Chart data={reviewsPerDay} />
+        <React.Suspense fallback={<Loading />}>
+          <Chart data={reviewsPerDay} />
+        </React.Suspense>
       ) : (
         <h3 className="fade-right text-xl">
           Você não fez nenhuma revisão no período selecionado... 😥

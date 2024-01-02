@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { ReviewsPerDay } from "../../../hooks/useStatistics";
 
-export const Chart = ({ data }: { data: ReviewsPerDay[] }) => {
+const Chart = ({ data }: { data: ReviewsPerDay[] }) => {
   return (
     <div>
       <h2 className="text-[24px] md:text-[32px] font-semibold text-black mb-8">
@@ -45,3 +45,5 @@ export const Chart = ({ data }: { data: ReviewsPerDay[] }) => {
     </div>
   );
 };
+
+export default Chart;

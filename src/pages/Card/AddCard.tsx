@@ -112,7 +112,7 @@ export const AddCard = ({ infoDeck }: { infoDeck: string | null }) => {
         {deckInfo && (
           <>
             <h3 className="text-2xl font-semibold text-black mb-3">
-              Informações do deck
+              Informações do baralho
             </h3>
             <p className="mt-4">
               <strong>Nome:</strong> {deckInfo && deckInfo.name}

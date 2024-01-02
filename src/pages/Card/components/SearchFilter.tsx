@@ -11,7 +11,7 @@ const FormSearchCardSchema = z.object({
 type FormSearchCardData = z.infer<typeof FormSearchCardSchema>;
 
 export const SearchFilter = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const { register, handleSubmit } = useForm<FormSearchCardData>({
     resolver: zodResolver(FormSearchCardSchema),
   });

@@ -15,7 +15,7 @@ export const Deck = () => {
 
   React.useEffect(() => {
     const pathname = window.location.pathname;
-    const [baseUrl, path, idAndName] = pathname.split("/");
+    const [, , idAndName] = pathname.split("/");
 
     setInfoDeck(idAndName);
 
